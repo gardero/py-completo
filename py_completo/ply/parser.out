@@ -1,0 +1,3267 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> document
+Rule 1     document -> header body
+Rule 2     document -> body
+Rule 3     header -> header_one
+Rule 4     header -> header_one header
+Rule 5     header_one -> BASE IRIREF
+Rule 6     header_one -> PREFIX PNAME_NS IRIREF
+Rule 7     header_one -> TOP L_IDENT
+Rule 8     header_one -> TOP IRIREF
+Rule 9     header_one -> UNA
+Rule 10    body -> section_list
+Rule 11    body -> statement_list
+Rule 12    section_list -> section
+Rule 13    section_list -> section section_list
+Rule 14    section -> annotation
+Rule 15    section -> annotation statement_list
+Rule 16    annotation -> RULES
+Rule 17    annotation -> FACTS
+Rule 18    annotation -> CONSTRAINTS
+Rule 19    annotation -> QUERIES
+Rule 20    statement_list -> statement
+Rule 21    statement_list -> statement statement_list
+Rule 22    statement -> statement_expr
+Rule 23    statement -> LABEL statement_expr
+Rule 24    statement_expr -> constraint
+Rule 25    statement_expr -> rule
+Rule 26    statement_expr -> drule
+Rule 27    statement_expr -> cquery
+Rule 28    statement_expr -> nquery
+Rule 29    statement_expr -> fact
+Rule 30    cquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_atoms_or_empty END_MARK
+Rule 31    cquery -> QUESTION_MARK RULE_MARK conjunction_atoms_or_empty END_MARK
+Rule 32    nquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_neg END_MARK
+Rule 33    nquery -> QUESTION_MARK RULE_MARK conjunction_neg END_MARK
+Rule 34    rule -> conjunction_atoms RULE_MARK conjunction_atoms_or_empty END_MARK
+Rule 35    drule -> START_STATEMENT_MARK conjunction_csf_list END_STATEMENT_MARK RULE_MARK conjunction_atoms_or_empty END_MARK
+Rule 36    conjunction_csf_list -> conjunction_csf
+Rule 37    conjunction_csf_list -> conjunction_csf SEPARATOR conjunction_csf_list
+Rule 38    conjunction_csf -> atom
+Rule 39    conjunction_csf -> START_TERMS_MARK conjunction_atoms END_TERMS_MARK
+Rule 40    constraint -> ABSURD_MARK RULE_MARK conjunction_atoms END_MARK
+Rule 41    fact -> conjunction_atoms END_MARK
+Rule 42    conjunction_neg -> neg_literal
+Rule 43    conjunction_neg -> neg_literal SEPARATOR conjunction_atoms
+Rule 44    conjunction_neg -> atom SEPARATOR conjunction_neg
+Rule 45    conjunction_neg -> neg_literal SEPARATOR conjunction_neg
+Rule 46    conjunction_atoms -> atom
+Rule 47    conjunction_atoms -> atom SEPARATOR conjunction_atoms
+Rule 48    conjunction_atoms_or_empty -> conjunction_atoms
+Rule 49    conjunction_atoms_or_empty -> empty
+Rule 50    neg_literal -> NEGATION std_atom
+Rule 51    atom -> equality
+Rule 52    atom -> std_atom
+Rule 53    equality -> term EQUALITY_MARK term
+Rule 54    std_atom -> predicate START_TERMS_MARK term_list END_TERMS_MARK
+Rule 55    term_list_or_empty -> term_list
+Rule 56    term_list_or_empty -> empty
+Rule 57    term_list -> term
+Rule 58    term_list -> term SEPARATOR term_list
+Rule 59    term -> constant
+Rule 60    term -> variable
+Rule 61    predicate -> prefixed_name
+Rule 62    predicate -> L_IDENT
+Rule 63    predicate -> IRIREF
+Rule 64    constant -> prefixed_name
+Rule 65    constant -> L_IDENT
+Rule 66    constant -> IRIREF
+Rule 67    constant -> literal
+Rule 68    variable -> U_IDENT
+Rule 69    variable -> BLANK_NODE_LABEL
+Rule 70    prefixed_name -> PNAME_LN
+Rule 71    prefixed_name -> PNAME_NS
+Rule 72    literal -> rdf_literal
+Rule 73    literal -> numeric_literal
+Rule 74    literal -> boolean_literal
+Rule 75    boolean_literal -> BOOLEAN
+Rule 76    rdf_literal -> STRING TOPTOP iri
+Rule 77    rdf_literal -> STRING LANGTAG
+Rule 78    rdf_literal -> STRING
+Rule 79    numeric_literal -> INTEGER
+Rule 80    numeric_literal -> DECIMAL
+Rule 81    numeric_literal -> DOUBLE
+Rule 82    numeric_literal -> FLOAT
+Rule 83    iri -> IRIREF
+Rule 84    iri -> prefixed_name
+Rule 85    empty -> <empty>
+
+Terminals, with rules where they appear
+
+ABSURD_MARK          : 40
+BASE                 : 5
+BLANK_NODE_LABEL     : 69
+BOOLEAN              : 75
+CONSTRAINTS          : 18
+DECIMAL              : 80
+DOUBLE               : 81
+END_MARK             : 30 31 32 33 34 35 40 41
+END_STATEMENT_MARK   : 35
+END_TERMS_MARK       : 30 32 39 54
+EQUALITY_MARK        : 53
+FACTS                : 17
+FLOAT                : 82
+INTEGER              : 79
+IRIREF               : 5 6 8 63 66 83
+LABEL                : 23
+LANGTAG              : 77
+L_IDENT              : 7 62 65
+NEGATION             : 50
+PNAME_LN             : 70
+PNAME_NS             : 6 71
+PREFIX               : 6
+QUERIES              : 19
+QUESTION_MARK        : 30 31 32 33
+RULES                : 16
+RULE_MARK            : 30 31 32 33 34 35 40
+SEPARATOR            : 37 43 44 45 47 58
+START_STATEMENT_MARK : 35
+START_TERMS_MARK     : 30 32 39 54
+STRING               : 76 77 78
+TOP                  : 7 8
+TOPTOP               : 76
+UNA                  : 9
+U_IDENT              : 68
+error                : 
+
+Nonterminals, with rules where they appear
+
+annotation           : 14 15
+atom                 : 38 44 46 47
+body                 : 1 2
+boolean_literal      : 74
+conjunction_atoms    : 34 39 40 41 43 47 48
+conjunction_atoms_or_empty : 30 31 34 35
+conjunction_csf      : 36 37
+conjunction_csf_list : 35 37
+conjunction_neg      : 32 33 44 45
+constant             : 59
+constraint           : 24
+cquery               : 27
+document             : 0
+drule                : 26
+empty                : 49 56
+equality             : 51
+fact                 : 29
+header               : 1 4
+header_one           : 3 4
+iri                  : 76
+literal              : 67
+neg_literal          : 42 43 45
+nquery               : 28
+numeric_literal      : 73
+predicate            : 54
+prefixed_name        : 61 64 84
+rdf_literal          : 72
+rule                 : 25
+section              : 12 13
+section_list         : 10 13
+statement            : 20 21
+statement_expr       : 22 23
+statement_list       : 11 15 21
+std_atom             : 50 52
+term                 : 53 53 57 58
+term_list            : 54 55 58
+term_list_or_empty   : 30 32
+variable             : 60
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . document
+    (1) document -> . header body
+    (2) document -> . body
+    (3) header -> . header_one
+    (4) header -> . header_one header
+    (10) body -> . section_list
+    (11) body -> . statement_list
+    (5) header_one -> . BASE IRIREF
+    (6) header_one -> . PREFIX PNAME_NS IRIREF
+    (7) header_one -> . TOP L_IDENT
+    (8) header_one -> . TOP IRIREF
+    (9) header_one -> . UNA
+    (12) section_list -> . section
+    (13) section_list -> . section section_list
+    (20) statement_list -> . statement
+    (21) statement_list -> . statement statement_list
+    (14) section -> . annotation
+    (15) section -> . annotation statement_list
+    (22) statement -> . statement_expr
+    (23) statement -> . LABEL statement_expr
+    (16) annotation -> . RULES
+    (17) annotation -> . FACTS
+    (18) annotation -> . CONSTRAINTS
+    (19) annotation -> . QUERIES
+    (24) statement_expr -> . constraint
+    (25) statement_expr -> . rule
+    (26) statement_expr -> . drule
+    (27) statement_expr -> . cquery
+    (28) statement_expr -> . nquery
+    (29) statement_expr -> . fact
+    (40) constraint -> . ABSURD_MARK RULE_MARK conjunction_atoms END_MARK
+    (34) rule -> . conjunction_atoms RULE_MARK conjunction_atoms_or_empty END_MARK
+    (35) drule -> . START_STATEMENT_MARK conjunction_csf_list END_STATEMENT_MARK RULE_MARK conjunction_atoms_or_empty END_MARK
+    (30) cquery -> . QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_atoms_or_empty END_MARK
+    (31) cquery -> . QUESTION_MARK RULE_MARK conjunction_atoms_or_empty END_MARK
+    (32) nquery -> . QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_neg END_MARK
+    (33) nquery -> . QUESTION_MARK RULE_MARK conjunction_neg END_MARK
+    (41) fact -> . conjunction_atoms END_MARK
+    (46) conjunction_atoms -> . atom
+    (47) conjunction_atoms -> . atom SEPARATOR conjunction_atoms
+    (51) atom -> . equality
+    (52) atom -> . std_atom
+    (53) equality -> . term EQUALITY_MARK term
+    (54) std_atom -> . predicate START_TERMS_MARK term_list END_TERMS_MARK
+    (59) term -> . constant
+    (60) term -> . variable
+    (61) predicate -> . prefixed_name
+    (62) predicate -> . L_IDENT
+    (63) predicate -> . IRIREF
+    (64) constant -> . prefixed_name
+    (65) constant -> . L_IDENT
+    (66) constant -> . IRIREF
+    (67) constant -> . literal
+    (68) variable -> . U_IDENT
+    (69) variable -> . BLANK_NODE_LABEL
+    (70) prefixed_name -> . PNAME_LN
+    (71) prefixed_name -> . PNAME_NS
+    (72) literal -> . rdf_literal
+    (73) literal -> . numeric_literal
+    (74) literal -> . boolean_literal
+    (76) rdf_literal -> . STRING TOPTOP iri
+    (77) rdf_literal -> . STRING LANGTAG
+    (78) rdf_literal -> . STRING
+    (79) numeric_literal -> . INTEGER
+    (80) numeric_literal -> . DECIMAL
+    (81) numeric_literal -> . DOUBLE
+    (82) numeric_literal -> . FLOAT
+    (75) boolean_literal -> . BOOLEAN
+
+    BASE            shift and go to state 7
+    PREFIX          shift and go to state 9
+    TOP             shift and go to state 11
+    UNA             shift and go to state 13
+    LABEL           shift and go to state 18
+    RULES           shift and go to state 19
+    FACTS           shift and go to state 20
+    CONSTRAINTS     shift and go to state 21
+    QUERIES         shift and go to state 22
+    ABSURD_MARK     shift and go to state 29
+    START_STATEMENT_MARK shift and go to state 31
+    QUESTION_MARK   shift and go to state 32
+    L_IDENT         shift and go to state 12
+    IRIREF          shift and go to state 8
+    U_IDENT         shift and go to state 42
+    BLANK_NODE_LABEL shift and go to state 43
+    PNAME_LN        shift and go to state 44
+    PNAME_NS        shift and go to state 10
+    STRING          shift and go to state 48
+    INTEGER         shift and go to state 49
+    DECIMAL         shift and go to state 50
+    DOUBLE          shift and go to state 51
+    FLOAT           shift and go to state 52
+    BOOLEAN         shift and go to state 53
+
+    document                       shift and go to state 1
+    header                         shift and go to state 2
+    body                           shift and go to state 3
+    header_one                     shift and go to state 4
+    section_list                   shift and go to state 5
+    statement_list                 shift and go to state 6
+    section                        shift and go to state 14
+    statement                      shift and go to state 15
+    annotation                     shift and go to state 16
+    statement_expr                 shift and go to state 17
+    constraint                     shift and go to state 23
+    rule                           shift and go to state 24
+    drule                          shift and go to state 25
+    cquery                         shift and go to state 26
+    nquery                         shift and go to state 27
+    fact                           shift and go to state 28
+    conjunction_atoms              shift and go to state 30
+    atom                           shift and go to state 33
+    equality                       shift and go to state 34
+    std_atom                       shift and go to state 35
+    term                           shift and go to state 36
+    predicate                      shift and go to state 37
+    constant                       shift and go to state 38
+    variable                       shift and go to state 39
+    prefixed_name                  shift and go to state 40
+    literal                        shift and go to state 41
+    rdf_literal                    shift and go to state 45
+    numeric_literal                shift and go to state 46
+    boolean_literal                shift and go to state 47
+
+state 1
+
+    (0) S' -> document .
+
+
+
+state 2
+
+    (1) document -> header . body
+    (10) body -> . section_list
+    (11) body -> . statement_list
+    (12) section_list -> . section
+    (13) section_list -> . section section_list
+    (20) statement_list -> . statement
+    (21) statement_list -> . statement statement_list
+    (14) section -> . annotation
+    (15) section -> . annotation statement_list
+    (22) statement -> . statement_expr
+    (23) statement -> . LABEL statement_expr
+    (16) annotation -> . RULES
+    (17) annotation -> . FACTS
+    (18) annotation -> . CONSTRAINTS
+    (19) annotation -> . QUERIES
+    (24) statement_expr -> . constraint
+    (25) statement_expr -> . rule
+    (26) statement_expr -> . drule
+    (27) statement_expr -> . cquery
+    (28) statement_expr -> . nquery
+    (29) statement_expr -> . fact
+    (40) constraint -> . ABSURD_MARK RULE_MARK conjunction_atoms END_MARK
+    (34) rule -> . conjunction_atoms RULE_MARK conjunction_atoms_or_empty END_MARK
+    (35) drule -> . START_STATEMENT_MARK conjunction_csf_list END_STATEMENT_MARK RULE_MARK conjunction_atoms_or_empty END_MARK
+    (30) cquery -> . QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_atoms_or_empty END_MARK
+    (31) cquery -> . QUESTION_MARK RULE_MARK conjunction_atoms_or_empty END_MARK
+    (32) nquery -> . QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_neg END_MARK
+    (33) nquery -> . QUESTION_MARK RULE_MARK conjunction_neg END_MARK
+    (41) fact -> . conjunction_atoms END_MARK
+    (46) conjunction_atoms -> . atom
+    (47) conjunction_atoms -> . atom SEPARATOR conjunction_atoms
+    (51) atom -> . equality
+    (52) atom -> . std_atom
+    (53) equality -> . term EQUALITY_MARK term
+    (54) std_atom -> . predicate START_TERMS_MARK term_list END_TERMS_MARK
+    (59) term -> . constant
+    (60) term -> . variable
+    (61) predicate -> . prefixed_name
+    (62) predicate -> . L_IDENT
+    (63) predicate -> . IRIREF
+    (64) constant -> . prefixed_name
+    (65) constant -> . L_IDENT
+    (66) constant -> . IRIREF
+    (67) constant -> . literal
+    (68) variable -> . U_IDENT
+    (69) variable -> . BLANK_NODE_LABEL
+    (70) prefixed_name -> . PNAME_LN
+    (71) prefixed_name -> . PNAME_NS
+    (72) literal -> . rdf_literal
+    (73) literal -> . numeric_literal
+    (74) literal -> . boolean_literal
+    (76) rdf_literal -> . STRING TOPTOP iri
+    (77) rdf_literal -> . STRING LANGTAG
+    (78) rdf_literal -> . STRING
+    (79) numeric_literal -> . INTEGER
+    (80) numeric_literal -> . DECIMAL
+    (81) numeric_literal -> . DOUBLE
+    (82) numeric_literal -> . FLOAT
+    (75) boolean_literal -> . BOOLEAN
+
+    LABEL           shift and go to state 18
+    RULES           shift and go to state 19
+    FACTS           shift and go to state 20
+    CONSTRAINTS     shift and go to state 21
+    QUERIES         shift and go to state 22
+    ABSURD_MARK     shift and go to state 29
+    START_STATEMENT_MARK shift and go to state 31
+    QUESTION_MARK   shift and go to state 32
+    L_IDENT         shift and go to state 12
+    IRIREF          shift and go to state 8
+    U_IDENT         shift and go to state 42
+    BLANK_NODE_LABEL shift and go to state 43
+    PNAME_LN        shift and go to state 44
+    PNAME_NS        shift and go to state 10
+    STRING          shift and go to state 48
+    INTEGER         shift and go to state 49
+    DECIMAL         shift and go to state 50
+    DOUBLE          shift and go to state 51
+    FLOAT           shift and go to state 52
+    BOOLEAN         shift and go to state 53
+
+    body                           shift and go to state 54
+    section_list                   shift and go to state 5
+    statement_list                 shift and go to state 6
+    section                        shift and go to state 14
+    statement                      shift and go to state 15
+    annotation                     shift and go to state 16
+    statement_expr                 shift and go to state 17
+    constraint                     shift and go to state 23
+    rule                           shift and go to state 24
+    drule                          shift and go to state 25
+    cquery                         shift and go to state 26
+    nquery                         shift and go to state 27
+    fact                           shift and go to state 28
+    conjunction_atoms              shift and go to state 30
+    atom                           shift and go to state 33
+    equality                       shift and go to state 34
+    std_atom                       shift and go to state 35
+    term                           shift and go to state 36
+    predicate                      shift and go to state 37
+    constant                       shift and go to state 38
+    variable                       shift and go to state 39
+    prefixed_name                  shift and go to state 40
+    literal                        shift and go to state 41
+    rdf_literal                    shift and go to state 45
+    numeric_literal                shift and go to state 46
+    boolean_literal                shift and go to state 47
+
+state 3
+
+    (2) document -> body .
+
+    $end            reduce using rule 2 (document -> body .)
+
+
+state 4
+
+    (3) header -> header_one .
+    (4) header -> header_one . header
+    (3) header -> . header_one
+    (4) header -> . header_one header
+    (5) header_one -> . BASE IRIREF
+    (6) header_one -> . PREFIX PNAME_NS IRIREF
+    (7) header_one -> . TOP L_IDENT
+    (8) header_one -> . TOP IRIREF
+    (9) header_one -> . UNA
+
+    LABEL           reduce using rule 3 (header -> header_one .)
+    RULES           reduce using rule 3 (header -> header_one .)
+    FACTS           reduce using rule 3 (header -> header_one .)
+    CONSTRAINTS     reduce using rule 3 (header -> header_one .)
+    QUERIES         reduce using rule 3 (header -> header_one .)
+    ABSURD_MARK     reduce using rule 3 (header -> header_one .)
+    START_STATEMENT_MARK reduce using rule 3 (header -> header_one .)
+    QUESTION_MARK   reduce using rule 3 (header -> header_one .)
+    L_IDENT         reduce using rule 3 (header -> header_one .)
+    IRIREF          reduce using rule 3 (header -> header_one .)
+    U_IDENT         reduce using rule 3 (header -> header_one .)
+    BLANK_NODE_LABEL reduce using rule 3 (header -> header_one .)
+    PNAME_LN        reduce using rule 3 (header -> header_one .)
+    PNAME_NS        reduce using rule 3 (header -> header_one .)
+    STRING          reduce using rule 3 (header -> header_one .)
+    INTEGER         reduce using rule 3 (header -> header_one .)
+    DECIMAL         reduce using rule 3 (header -> header_one .)
+    DOUBLE          reduce using rule 3 (header -> header_one .)
+    FLOAT           reduce using rule 3 (header -> header_one .)
+    BOOLEAN         reduce using rule 3 (header -> header_one .)
+    BASE            shift and go to state 7
+    PREFIX          shift and go to state 9
+    TOP             shift and go to state 11
+    UNA             shift and go to state 13
+
+    header_one                     shift and go to state 4
+    header                         shift and go to state 55
+
+state 5
+
+    (10) body -> section_list .
+
+    $end            reduce using rule 10 (body -> section_list .)
+
+
+state 6
+
+    (11) body -> statement_list .
+
+    $end            reduce using rule 11 (body -> statement_list .)
+
+
+state 7
+
+    (5) header_one -> BASE . IRIREF
+
+    IRIREF          shift and go to state 56
+
+
+state 8
+
+    (63) predicate -> IRIREF .
+    (66) constant -> IRIREF .
+
+    START_TERMS_MARK reduce using rule 63 (predicate -> IRIREF .)
+    EQUALITY_MARK   reduce using rule 66 (constant -> IRIREF .)
+
+
+state 9
+
+    (6) header_one -> PREFIX . PNAME_NS IRIREF
+
+    PNAME_NS        shift and go to state 57
+
+
+state 10
+
+    (71) prefixed_name -> PNAME_NS .
+
+    START_TERMS_MARK reduce using rule 71 (prefixed_name -> PNAME_NS .)
+    EQUALITY_MARK   reduce using rule 71 (prefixed_name -> PNAME_NS .)
+    SEPARATOR       reduce using rule 71 (prefixed_name -> PNAME_NS .)
+    END_TERMS_MARK  reduce using rule 71 (prefixed_name -> PNAME_NS .)
+    RULE_MARK       reduce using rule 71 (prefixed_name -> PNAME_NS .)
+    END_MARK        reduce using rule 71 (prefixed_name -> PNAME_NS .)
+    END_STATEMENT_MARK reduce using rule 71 (prefixed_name -> PNAME_NS .)
+
+
+state 11
+
+    (7) header_one -> TOP . L_IDENT
+    (8) header_one -> TOP . IRIREF
+
+    L_IDENT         shift and go to state 58
+    IRIREF          shift and go to state 59
+
+
+state 12
+
+    (62) predicate -> L_IDENT .
+    (65) constant -> L_IDENT .
+
+    START_TERMS_MARK reduce using rule 62 (predicate -> L_IDENT .)
+    EQUALITY_MARK   reduce using rule 65 (constant -> L_IDENT .)
+
+
+state 13
+
+    (9) header_one -> UNA .
+
+    BASE            reduce using rule 9 (header_one -> UNA .)
+    PREFIX          reduce using rule 9 (header_one -> UNA .)
+    TOP             reduce using rule 9 (header_one -> UNA .)
+    UNA             reduce using rule 9 (header_one -> UNA .)
+    LABEL           reduce using rule 9 (header_one -> UNA .)
+    RULES           reduce using rule 9 (header_one -> UNA .)
+    FACTS           reduce using rule 9 (header_one -> UNA .)
+    CONSTRAINTS     reduce using rule 9 (header_one -> UNA .)
+    QUERIES         reduce using rule 9 (header_one -> UNA .)
+    ABSURD_MARK     reduce using rule 9 (header_one -> UNA .)
+    START_STATEMENT_MARK reduce using rule 9 (header_one -> UNA .)
+    QUESTION_MARK   reduce using rule 9 (header_one -> UNA .)
+    L_IDENT         reduce using rule 9 (header_one -> UNA .)
+    IRIREF          reduce using rule 9 (header_one -> UNA .)
+    U_IDENT         reduce using rule 9 (header_one -> UNA .)
+    BLANK_NODE_LABEL reduce using rule 9 (header_one -> UNA .)
+    PNAME_LN        reduce using rule 9 (header_one -> UNA .)
+    PNAME_NS        reduce using rule 9 (header_one -> UNA .)
+    STRING          reduce using rule 9 (header_one -> UNA .)
+    INTEGER         reduce using rule 9 (header_one -> UNA .)
+    DECIMAL         reduce using rule 9 (header_one -> UNA .)
+    DOUBLE          reduce using rule 9 (header_one -> UNA .)
+    FLOAT           reduce using rule 9 (header_one -> UNA .)
+    BOOLEAN         reduce using rule 9 (header_one -> UNA .)
+
+
+state 14
+
+    (12) section_list -> section .
+    (13) section_list -> section . section_list
+    (12) section_list -> . section
+    (13) section_list -> . section section_list
+    (14) section -> . annotation
+    (15) section -> . annotation statement_list
+    (16) annotation -> . RULES
+    (17) annotation -> . FACTS
+    (18) annotation -> . CONSTRAINTS
+    (19) annotation -> . QUERIES
+
+    $end            reduce using rule 12 (section_list -> section .)
+    RULES           shift and go to state 19
+    FACTS           shift and go to state 20
+    CONSTRAINTS     shift and go to state 21
+    QUERIES         shift and go to state 22
+
+    section                        shift and go to state 14
+    section_list                   shift and go to state 60
+    annotation                     shift and go to state 16
+
+state 15
+
+    (20) statement_list -> statement .
+    (21) statement_list -> statement . statement_list
+    (20) statement_list -> . statement
+    (21) statement_list -> . statement statement_list
+    (22) statement -> . statement_expr
+    (23) statement -> . LABEL statement_expr
+    (24) statement_expr -> . constraint
+    (25) statement_expr -> . rule
+    (26) statement_expr -> . drule
+    (27) statement_expr -> . cquery
+    (28) statement_expr -> . nquery
+    (29) statement_expr -> . fact
+    (40) constraint -> . ABSURD_MARK RULE_MARK conjunction_atoms END_MARK
+    (34) rule -> . conjunction_atoms RULE_MARK conjunction_atoms_or_empty END_MARK
+    (35) drule -> . START_STATEMENT_MARK conjunction_csf_list END_STATEMENT_MARK RULE_MARK conjunction_atoms_or_empty END_MARK
+    (30) cquery -> . QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_atoms_or_empty END_MARK
+    (31) cquery -> . QUESTION_MARK RULE_MARK conjunction_atoms_or_empty END_MARK
+    (32) nquery -> . QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_neg END_MARK
+    (33) nquery -> . QUESTION_MARK RULE_MARK conjunction_neg END_MARK
+    (41) fact -> . conjunction_atoms END_MARK
+    (46) conjunction_atoms -> . atom
+    (47) conjunction_atoms -> . atom SEPARATOR conjunction_atoms
+    (51) atom -> . equality
+    (52) atom -> . std_atom
+    (53) equality -> . term EQUALITY_MARK term
+    (54) std_atom -> . predicate START_TERMS_MARK term_list END_TERMS_MARK
+    (59) term -> . constant
+    (60) term -> . variable
+    (61) predicate -> . prefixed_name
+    (62) predicate -> . L_IDENT
+    (63) predicate -> . IRIREF
+    (64) constant -> . prefixed_name
+    (65) constant -> . L_IDENT
+    (66) constant -> . IRIREF
+    (67) constant -> . literal
+    (68) variable -> . U_IDENT
+    (69) variable -> . BLANK_NODE_LABEL
+    (70) prefixed_name -> . PNAME_LN
+    (71) prefixed_name -> . PNAME_NS
+    (72) literal -> . rdf_literal
+    (73) literal -> . numeric_literal
+    (74) literal -> . boolean_literal
+    (76) rdf_literal -> . STRING TOPTOP iri
+    (77) rdf_literal -> . STRING LANGTAG
+    (78) rdf_literal -> . STRING
+    (79) numeric_literal -> . INTEGER
+    (80) numeric_literal -> . DECIMAL
+    (81) numeric_literal -> . DOUBLE
+    (82) numeric_literal -> . FLOAT
+    (75) boolean_literal -> . BOOLEAN
+
+    $end            reduce using rule 20 (statement_list -> statement .)
+    RULES           reduce using rule 20 (statement_list -> statement .)
+    FACTS           reduce using rule 20 (statement_list -> statement .)
+    CONSTRAINTS     reduce using rule 20 (statement_list -> statement .)
+    QUERIES         reduce using rule 20 (statement_list -> statement .)
+    LABEL           shift and go to state 18
+    ABSURD_MARK     shift and go to state 29
+    START_STATEMENT_MARK shift and go to state 31
+    QUESTION_MARK   shift and go to state 32
+    L_IDENT         shift and go to state 12
+    IRIREF          shift and go to state 8
+    U_IDENT         shift and go to state 42
+    BLANK_NODE_LABEL shift and go to state 43
+    PNAME_LN        shift and go to state 44
+    PNAME_NS        shift and go to state 10
+    STRING          shift and go to state 48
+    INTEGER         shift and go to state 49
+    DECIMAL         shift and go to state 50
+    DOUBLE          shift and go to state 51
+    FLOAT           shift and go to state 52
+    BOOLEAN         shift and go to state 53
+
+    statement                      shift and go to state 15
+    statement_list                 shift and go to state 61
+    statement_expr                 shift and go to state 17
+    constraint                     shift and go to state 23
+    rule                           shift and go to state 24
+    drule                          shift and go to state 25
+    cquery                         shift and go to state 26
+    nquery                         shift and go to state 27
+    fact                           shift and go to state 28
+    conjunction_atoms              shift and go to state 30
+    atom                           shift and go to state 33
+    equality                       shift and go to state 34
+    std_atom                       shift and go to state 35
+    term                           shift and go to state 36
+    predicate                      shift and go to state 37
+    constant                       shift and go to state 38
+    variable                       shift and go to state 39
+    prefixed_name                  shift and go to state 40
+    literal                        shift and go to state 41
+    rdf_literal                    shift and go to state 45
+    numeric_literal                shift and go to state 46
+    boolean_literal                shift and go to state 47
+
+state 16
+
+    (14) section -> annotation .
+    (15) section -> annotation . statement_list
+    (20) statement_list -> . statement
+    (21) statement_list -> . statement statement_list
+    (22) statement -> . statement_expr
+    (23) statement -> . LABEL statement_expr
+    (24) statement_expr -> . constraint
+    (25) statement_expr -> . rule
+    (26) statement_expr -> . drule
+    (27) statement_expr -> . cquery
+    (28) statement_expr -> . nquery
+    (29) statement_expr -> . fact
+    (40) constraint -> . ABSURD_MARK RULE_MARK conjunction_atoms END_MARK
+    (34) rule -> . conjunction_atoms RULE_MARK conjunction_atoms_or_empty END_MARK
+    (35) drule -> . START_STATEMENT_MARK conjunction_csf_list END_STATEMENT_MARK RULE_MARK conjunction_atoms_or_empty END_MARK
+    (30) cquery -> . QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_atoms_or_empty END_MARK
+    (31) cquery -> . QUESTION_MARK RULE_MARK conjunction_atoms_or_empty END_MARK
+    (32) nquery -> . QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_neg END_MARK
+    (33) nquery -> . QUESTION_MARK RULE_MARK conjunction_neg END_MARK
+    (41) fact -> . conjunction_atoms END_MARK
+    (46) conjunction_atoms -> . atom
+    (47) conjunction_atoms -> . atom SEPARATOR conjunction_atoms
+    (51) atom -> . equality
+    (52) atom -> . std_atom
+    (53) equality -> . term EQUALITY_MARK term
+    (54) std_atom -> . predicate START_TERMS_MARK term_list END_TERMS_MARK
+    (59) term -> . constant
+    (60) term -> . variable
+    (61) predicate -> . prefixed_name
+    (62) predicate -> . L_IDENT
+    (63) predicate -> . IRIREF
+    (64) constant -> . prefixed_name
+    (65) constant -> . L_IDENT
+    (66) constant -> . IRIREF
+    (67) constant -> . literal
+    (68) variable -> . U_IDENT
+    (69) variable -> . BLANK_NODE_LABEL
+    (70) prefixed_name -> . PNAME_LN
+    (71) prefixed_name -> . PNAME_NS
+    (72) literal -> . rdf_literal
+    (73) literal -> . numeric_literal
+    (74) literal -> . boolean_literal
+    (76) rdf_literal -> . STRING TOPTOP iri
+    (77) rdf_literal -> . STRING LANGTAG
+    (78) rdf_literal -> . STRING
+    (79) numeric_literal -> . INTEGER
+    (80) numeric_literal -> . DECIMAL
+    (81) numeric_literal -> . DOUBLE
+    (82) numeric_literal -> . FLOAT
+    (75) boolean_literal -> . BOOLEAN
+
+    RULES           reduce using rule 14 (section -> annotation .)
+    FACTS           reduce using rule 14 (section -> annotation .)
+    CONSTRAINTS     reduce using rule 14 (section -> annotation .)
+    QUERIES         reduce using rule 14 (section -> annotation .)
+    $end            reduce using rule 14 (section -> annotation .)
+    LABEL           shift and go to state 18
+    ABSURD_MARK     shift and go to state 29
+    START_STATEMENT_MARK shift and go to state 31
+    QUESTION_MARK   shift and go to state 32
+    L_IDENT         shift and go to state 12
+    IRIREF          shift and go to state 8
+    U_IDENT         shift and go to state 42
+    BLANK_NODE_LABEL shift and go to state 43
+    PNAME_LN        shift and go to state 44
+    PNAME_NS        shift and go to state 10
+    STRING          shift and go to state 48
+    INTEGER         shift and go to state 49
+    DECIMAL         shift and go to state 50
+    DOUBLE          shift and go to state 51
+    FLOAT           shift and go to state 52
+    BOOLEAN         shift and go to state 53
+
+    statement_list                 shift and go to state 62
+    statement                      shift and go to state 15
+    statement_expr                 shift and go to state 17
+    constraint                     shift and go to state 23
+    rule                           shift and go to state 24
+    drule                          shift and go to state 25
+    cquery                         shift and go to state 26
+    nquery                         shift and go to state 27
+    fact                           shift and go to state 28
+    conjunction_atoms              shift and go to state 30
+    atom                           shift and go to state 33
+    equality                       shift and go to state 34
+    std_atom                       shift and go to state 35
+    term                           shift and go to state 36
+    predicate                      shift and go to state 37
+    constant                       shift and go to state 38
+    variable                       shift and go to state 39
+    prefixed_name                  shift and go to state 40
+    literal                        shift and go to state 41
+    rdf_literal                    shift and go to state 45
+    numeric_literal                shift and go to state 46
+    boolean_literal                shift and go to state 47
+
+state 17
+
+    (22) statement -> statement_expr .
+
+    LABEL           reduce using rule 22 (statement -> statement_expr .)
+    ABSURD_MARK     reduce using rule 22 (statement -> statement_expr .)
+    START_STATEMENT_MARK reduce using rule 22 (statement -> statement_expr .)
+    QUESTION_MARK   reduce using rule 22 (statement -> statement_expr .)
+    L_IDENT         reduce using rule 22 (statement -> statement_expr .)
+    IRIREF          reduce using rule 22 (statement -> statement_expr .)
+    U_IDENT         reduce using rule 22 (statement -> statement_expr .)
+    BLANK_NODE_LABEL reduce using rule 22 (statement -> statement_expr .)
+    PNAME_LN        reduce using rule 22 (statement -> statement_expr .)
+    PNAME_NS        reduce using rule 22 (statement -> statement_expr .)
+    STRING          reduce using rule 22 (statement -> statement_expr .)
+    INTEGER         reduce using rule 22 (statement -> statement_expr .)
+    DECIMAL         reduce using rule 22 (statement -> statement_expr .)
+    DOUBLE          reduce using rule 22 (statement -> statement_expr .)
+    FLOAT           reduce using rule 22 (statement -> statement_expr .)
+    BOOLEAN         reduce using rule 22 (statement -> statement_expr .)
+    $end            reduce using rule 22 (statement -> statement_expr .)
+    RULES           reduce using rule 22 (statement -> statement_expr .)
+    FACTS           reduce using rule 22 (statement -> statement_expr .)
+    CONSTRAINTS     reduce using rule 22 (statement -> statement_expr .)
+    QUERIES         reduce using rule 22 (statement -> statement_expr .)
+
+
+state 18
+
+    (23) statement -> LABEL . statement_expr
+    (24) statement_expr -> . constraint
+    (25) statement_expr -> . rule
+    (26) statement_expr -> . drule
+    (27) statement_expr -> . cquery
+    (28) statement_expr -> . nquery
+    (29) statement_expr -> . fact
+    (40) constraint -> . ABSURD_MARK RULE_MARK conjunction_atoms END_MARK
+    (34) rule -> . conjunction_atoms RULE_MARK conjunction_atoms_or_empty END_MARK
+    (35) drule -> . START_STATEMENT_MARK conjunction_csf_list END_STATEMENT_MARK RULE_MARK conjunction_atoms_or_empty END_MARK
+    (30) cquery -> . QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_atoms_or_empty END_MARK
+    (31) cquery -> . QUESTION_MARK RULE_MARK conjunction_atoms_or_empty END_MARK
+    (32) nquery -> . QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_neg END_MARK
+    (33) nquery -> . QUESTION_MARK RULE_MARK conjunction_neg END_MARK
+    (41) fact -> . conjunction_atoms END_MARK
+    (46) conjunction_atoms -> . atom
+    (47) conjunction_atoms -> . atom SEPARATOR conjunction_atoms
+    (51) atom -> . equality
+    (52) atom -> . std_atom
+    (53) equality -> . term EQUALITY_MARK term
+    (54) std_atom -> . predicate START_TERMS_MARK term_list END_TERMS_MARK
+    (59) term -> . constant
+    (60) term -> . variable
+    (61) predicate -> . prefixed_name
+    (62) predicate -> . L_IDENT
+    (63) predicate -> . IRIREF
+    (64) constant -> . prefixed_name
+    (65) constant -> . L_IDENT
+    (66) constant -> . IRIREF
+    (67) constant -> . literal
+    (68) variable -> . U_IDENT
+    (69) variable -> . BLANK_NODE_LABEL
+    (70) prefixed_name -> . PNAME_LN
+    (71) prefixed_name -> . PNAME_NS
+    (72) literal -> . rdf_literal
+    (73) literal -> . numeric_literal
+    (74) literal -> . boolean_literal
+    (76) rdf_literal -> . STRING TOPTOP iri
+    (77) rdf_literal -> . STRING LANGTAG
+    (78) rdf_literal -> . STRING
+    (79) numeric_literal -> . INTEGER
+    (80) numeric_literal -> . DECIMAL
+    (81) numeric_literal -> . DOUBLE
+    (82) numeric_literal -> . FLOAT
+    (75) boolean_literal -> . BOOLEAN
+
+    ABSURD_MARK     shift and go to state 29
+    START_STATEMENT_MARK shift and go to state 31
+    QUESTION_MARK   shift and go to state 32
+    L_IDENT         shift and go to state 12
+    IRIREF          shift and go to state 8
+    U_IDENT         shift and go to state 42
+    BLANK_NODE_LABEL shift and go to state 43
+    PNAME_LN        shift and go to state 44
+    PNAME_NS        shift and go to state 10
+    STRING          shift and go to state 48
+    INTEGER         shift and go to state 49
+    DECIMAL         shift and go to state 50
+    DOUBLE          shift and go to state 51
+    FLOAT           shift and go to state 52
+    BOOLEAN         shift and go to state 53
+
+    statement_expr                 shift and go to state 63
+    constraint                     shift and go to state 23
+    rule                           shift and go to state 24
+    drule                          shift and go to state 25
+    cquery                         shift and go to state 26
+    nquery                         shift and go to state 27
+    fact                           shift and go to state 28
+    conjunction_atoms              shift and go to state 30
+    atom                           shift and go to state 33
+    equality                       shift and go to state 34
+    std_atom                       shift and go to state 35
+    term                           shift and go to state 36
+    predicate                      shift and go to state 37
+    constant                       shift and go to state 38
+    variable                       shift and go to state 39
+    prefixed_name                  shift and go to state 40
+    literal                        shift and go to state 41
+    rdf_literal                    shift and go to state 45
+    numeric_literal                shift and go to state 46
+    boolean_literal                shift and go to state 47
+
+state 19
+
+    (16) annotation -> RULES .
+
+    LABEL           reduce using rule 16 (annotation -> RULES .)
+    ABSURD_MARK     reduce using rule 16 (annotation -> RULES .)
+    START_STATEMENT_MARK reduce using rule 16 (annotation -> RULES .)
+    QUESTION_MARK   reduce using rule 16 (annotation -> RULES .)
+    L_IDENT         reduce using rule 16 (annotation -> RULES .)
+    IRIREF          reduce using rule 16 (annotation -> RULES .)
+    U_IDENT         reduce using rule 16 (annotation -> RULES .)
+    BLANK_NODE_LABEL reduce using rule 16 (annotation -> RULES .)
+    PNAME_LN        reduce using rule 16 (annotation -> RULES .)
+    PNAME_NS        reduce using rule 16 (annotation -> RULES .)
+    STRING          reduce using rule 16 (annotation -> RULES .)
+    INTEGER         reduce using rule 16 (annotation -> RULES .)
+    DECIMAL         reduce using rule 16 (annotation -> RULES .)
+    DOUBLE          reduce using rule 16 (annotation -> RULES .)
+    FLOAT           reduce using rule 16 (annotation -> RULES .)
+    BOOLEAN         reduce using rule 16 (annotation -> RULES .)
+    RULES           reduce using rule 16 (annotation -> RULES .)
+    FACTS           reduce using rule 16 (annotation -> RULES .)
+    CONSTRAINTS     reduce using rule 16 (annotation -> RULES .)
+    QUERIES         reduce using rule 16 (annotation -> RULES .)
+    $end            reduce using rule 16 (annotation -> RULES .)
+
+
+state 20
+
+    (17) annotation -> FACTS .
+
+    LABEL           reduce using rule 17 (annotation -> FACTS .)
+    ABSURD_MARK     reduce using rule 17 (annotation -> FACTS .)
+    START_STATEMENT_MARK reduce using rule 17 (annotation -> FACTS .)
+    QUESTION_MARK   reduce using rule 17 (annotation -> FACTS .)
+    L_IDENT         reduce using rule 17 (annotation -> FACTS .)
+    IRIREF          reduce using rule 17 (annotation -> FACTS .)
+    U_IDENT         reduce using rule 17 (annotation -> FACTS .)
+    BLANK_NODE_LABEL reduce using rule 17 (annotation -> FACTS .)
+    PNAME_LN        reduce using rule 17 (annotation -> FACTS .)
+    PNAME_NS        reduce using rule 17 (annotation -> FACTS .)
+    STRING          reduce using rule 17 (annotation -> FACTS .)
+    INTEGER         reduce using rule 17 (annotation -> FACTS .)
+    DECIMAL         reduce using rule 17 (annotation -> FACTS .)
+    DOUBLE          reduce using rule 17 (annotation -> FACTS .)
+    FLOAT           reduce using rule 17 (annotation -> FACTS .)
+    BOOLEAN         reduce using rule 17 (annotation -> FACTS .)
+    RULES           reduce using rule 17 (annotation -> FACTS .)
+    FACTS           reduce using rule 17 (annotation -> FACTS .)
+    CONSTRAINTS     reduce using rule 17 (annotation -> FACTS .)
+    QUERIES         reduce using rule 17 (annotation -> FACTS .)
+    $end            reduce using rule 17 (annotation -> FACTS .)
+
+
+state 21
+
+    (18) annotation -> CONSTRAINTS .
+
+    LABEL           reduce using rule 18 (annotation -> CONSTRAINTS .)
+    ABSURD_MARK     reduce using rule 18 (annotation -> CONSTRAINTS .)
+    START_STATEMENT_MARK reduce using rule 18 (annotation -> CONSTRAINTS .)
+    QUESTION_MARK   reduce using rule 18 (annotation -> CONSTRAINTS .)
+    L_IDENT         reduce using rule 18 (annotation -> CONSTRAINTS .)
+    IRIREF          reduce using rule 18 (annotation -> CONSTRAINTS .)
+    U_IDENT         reduce using rule 18 (annotation -> CONSTRAINTS .)
+    BLANK_NODE_LABEL reduce using rule 18 (annotation -> CONSTRAINTS .)
+    PNAME_LN        reduce using rule 18 (annotation -> CONSTRAINTS .)
+    PNAME_NS        reduce using rule 18 (annotation -> CONSTRAINTS .)
+    STRING          reduce using rule 18 (annotation -> CONSTRAINTS .)
+    INTEGER         reduce using rule 18 (annotation -> CONSTRAINTS .)
+    DECIMAL         reduce using rule 18 (annotation -> CONSTRAINTS .)
+    DOUBLE          reduce using rule 18 (annotation -> CONSTRAINTS .)
+    FLOAT           reduce using rule 18 (annotation -> CONSTRAINTS .)
+    BOOLEAN         reduce using rule 18 (annotation -> CONSTRAINTS .)
+    RULES           reduce using rule 18 (annotation -> CONSTRAINTS .)
+    FACTS           reduce using rule 18 (annotation -> CONSTRAINTS .)
+    CONSTRAINTS     reduce using rule 18 (annotation -> CONSTRAINTS .)
+    QUERIES         reduce using rule 18 (annotation -> CONSTRAINTS .)
+    $end            reduce using rule 18 (annotation -> CONSTRAINTS .)
+
+
+state 22
+
+    (19) annotation -> QUERIES .
+
+    LABEL           reduce using rule 19 (annotation -> QUERIES .)
+    ABSURD_MARK     reduce using rule 19 (annotation -> QUERIES .)
+    START_STATEMENT_MARK reduce using rule 19 (annotation -> QUERIES .)
+    QUESTION_MARK   reduce using rule 19 (annotation -> QUERIES .)
+    L_IDENT         reduce using rule 19 (annotation -> QUERIES .)
+    IRIREF          reduce using rule 19 (annotation -> QUERIES .)
+    U_IDENT         reduce using rule 19 (annotation -> QUERIES .)
+    BLANK_NODE_LABEL reduce using rule 19 (annotation -> QUERIES .)
+    PNAME_LN        reduce using rule 19 (annotation -> QUERIES .)
+    PNAME_NS        reduce using rule 19 (annotation -> QUERIES .)
+    STRING          reduce using rule 19 (annotation -> QUERIES .)
+    INTEGER         reduce using rule 19 (annotation -> QUERIES .)
+    DECIMAL         reduce using rule 19 (annotation -> QUERIES .)
+    DOUBLE          reduce using rule 19 (annotation -> QUERIES .)
+    FLOAT           reduce using rule 19 (annotation -> QUERIES .)
+    BOOLEAN         reduce using rule 19 (annotation -> QUERIES .)
+    RULES           reduce using rule 19 (annotation -> QUERIES .)
+    FACTS           reduce using rule 19 (annotation -> QUERIES .)
+    CONSTRAINTS     reduce using rule 19 (annotation -> QUERIES .)
+    QUERIES         reduce using rule 19 (annotation -> QUERIES .)
+    $end            reduce using rule 19 (annotation -> QUERIES .)
+
+
+state 23
+
+    (24) statement_expr -> constraint .
+
+    LABEL           reduce using rule 24 (statement_expr -> constraint .)
+    ABSURD_MARK     reduce using rule 24 (statement_expr -> constraint .)
+    START_STATEMENT_MARK reduce using rule 24 (statement_expr -> constraint .)
+    QUESTION_MARK   reduce using rule 24 (statement_expr -> constraint .)
+    L_IDENT         reduce using rule 24 (statement_expr -> constraint .)
+    IRIREF          reduce using rule 24 (statement_expr -> constraint .)
+    U_IDENT         reduce using rule 24 (statement_expr -> constraint .)
+    BLANK_NODE_LABEL reduce using rule 24 (statement_expr -> constraint .)
+    PNAME_LN        reduce using rule 24 (statement_expr -> constraint .)
+    PNAME_NS        reduce using rule 24 (statement_expr -> constraint .)
+    STRING          reduce using rule 24 (statement_expr -> constraint .)
+    INTEGER         reduce using rule 24 (statement_expr -> constraint .)
+    DECIMAL         reduce using rule 24 (statement_expr -> constraint .)
+    DOUBLE          reduce using rule 24 (statement_expr -> constraint .)
+    FLOAT           reduce using rule 24 (statement_expr -> constraint .)
+    BOOLEAN         reduce using rule 24 (statement_expr -> constraint .)
+    $end            reduce using rule 24 (statement_expr -> constraint .)
+    RULES           reduce using rule 24 (statement_expr -> constraint .)
+    FACTS           reduce using rule 24 (statement_expr -> constraint .)
+    CONSTRAINTS     reduce using rule 24 (statement_expr -> constraint .)
+    QUERIES         reduce using rule 24 (statement_expr -> constraint .)
+
+
+state 24
+
+    (25) statement_expr -> rule .
+
+    LABEL           reduce using rule 25 (statement_expr -> rule .)
+    ABSURD_MARK     reduce using rule 25 (statement_expr -> rule .)
+    START_STATEMENT_MARK reduce using rule 25 (statement_expr -> rule .)
+    QUESTION_MARK   reduce using rule 25 (statement_expr -> rule .)
+    L_IDENT         reduce using rule 25 (statement_expr -> rule .)
+    IRIREF          reduce using rule 25 (statement_expr -> rule .)
+    U_IDENT         reduce using rule 25 (statement_expr -> rule .)
+    BLANK_NODE_LABEL reduce using rule 25 (statement_expr -> rule .)
+    PNAME_LN        reduce using rule 25 (statement_expr -> rule .)
+    PNAME_NS        reduce using rule 25 (statement_expr -> rule .)
+    STRING          reduce using rule 25 (statement_expr -> rule .)
+    INTEGER         reduce using rule 25 (statement_expr -> rule .)
+    DECIMAL         reduce using rule 25 (statement_expr -> rule .)
+    DOUBLE          reduce using rule 25 (statement_expr -> rule .)
+    FLOAT           reduce using rule 25 (statement_expr -> rule .)
+    BOOLEAN         reduce using rule 25 (statement_expr -> rule .)
+    $end            reduce using rule 25 (statement_expr -> rule .)
+    RULES           reduce using rule 25 (statement_expr -> rule .)
+    FACTS           reduce using rule 25 (statement_expr -> rule .)
+    CONSTRAINTS     reduce using rule 25 (statement_expr -> rule .)
+    QUERIES         reduce using rule 25 (statement_expr -> rule .)
+
+
+state 25
+
+    (26) statement_expr -> drule .
+
+    LABEL           reduce using rule 26 (statement_expr -> drule .)
+    ABSURD_MARK     reduce using rule 26 (statement_expr -> drule .)
+    START_STATEMENT_MARK reduce using rule 26 (statement_expr -> drule .)
+    QUESTION_MARK   reduce using rule 26 (statement_expr -> drule .)
+    L_IDENT         reduce using rule 26 (statement_expr -> drule .)
+    IRIREF          reduce using rule 26 (statement_expr -> drule .)
+    U_IDENT         reduce using rule 26 (statement_expr -> drule .)
+    BLANK_NODE_LABEL reduce using rule 26 (statement_expr -> drule .)
+    PNAME_LN        reduce using rule 26 (statement_expr -> drule .)
+    PNAME_NS        reduce using rule 26 (statement_expr -> drule .)
+    STRING          reduce using rule 26 (statement_expr -> drule .)
+    INTEGER         reduce using rule 26 (statement_expr -> drule .)
+    DECIMAL         reduce using rule 26 (statement_expr -> drule .)
+    DOUBLE          reduce using rule 26 (statement_expr -> drule .)
+    FLOAT           reduce using rule 26 (statement_expr -> drule .)
+    BOOLEAN         reduce using rule 26 (statement_expr -> drule .)
+    $end            reduce using rule 26 (statement_expr -> drule .)
+    RULES           reduce using rule 26 (statement_expr -> drule .)
+    FACTS           reduce using rule 26 (statement_expr -> drule .)
+    CONSTRAINTS     reduce using rule 26 (statement_expr -> drule .)
+    QUERIES         reduce using rule 26 (statement_expr -> drule .)
+
+
+state 26
+
+    (27) statement_expr -> cquery .
+
+    LABEL           reduce using rule 27 (statement_expr -> cquery .)
+    ABSURD_MARK     reduce using rule 27 (statement_expr -> cquery .)
+    START_STATEMENT_MARK reduce using rule 27 (statement_expr -> cquery .)
+    QUESTION_MARK   reduce using rule 27 (statement_expr -> cquery .)
+    L_IDENT         reduce using rule 27 (statement_expr -> cquery .)
+    IRIREF          reduce using rule 27 (statement_expr -> cquery .)
+    U_IDENT         reduce using rule 27 (statement_expr -> cquery .)
+    BLANK_NODE_LABEL reduce using rule 27 (statement_expr -> cquery .)
+    PNAME_LN        reduce using rule 27 (statement_expr -> cquery .)
+    PNAME_NS        reduce using rule 27 (statement_expr -> cquery .)
+    STRING          reduce using rule 27 (statement_expr -> cquery .)
+    INTEGER         reduce using rule 27 (statement_expr -> cquery .)
+    DECIMAL         reduce using rule 27 (statement_expr -> cquery .)
+    DOUBLE          reduce using rule 27 (statement_expr -> cquery .)
+    FLOAT           reduce using rule 27 (statement_expr -> cquery .)
+    BOOLEAN         reduce using rule 27 (statement_expr -> cquery .)
+    $end            reduce using rule 27 (statement_expr -> cquery .)
+    RULES           reduce using rule 27 (statement_expr -> cquery .)
+    FACTS           reduce using rule 27 (statement_expr -> cquery .)
+    CONSTRAINTS     reduce using rule 27 (statement_expr -> cquery .)
+    QUERIES         reduce using rule 27 (statement_expr -> cquery .)
+
+
+state 27
+
+    (28) statement_expr -> nquery .
+
+    LABEL           reduce using rule 28 (statement_expr -> nquery .)
+    ABSURD_MARK     reduce using rule 28 (statement_expr -> nquery .)
+    START_STATEMENT_MARK reduce using rule 28 (statement_expr -> nquery .)
+    QUESTION_MARK   reduce using rule 28 (statement_expr -> nquery .)
+    L_IDENT         reduce using rule 28 (statement_expr -> nquery .)
+    IRIREF          reduce using rule 28 (statement_expr -> nquery .)
+    U_IDENT         reduce using rule 28 (statement_expr -> nquery .)
+    BLANK_NODE_LABEL reduce using rule 28 (statement_expr -> nquery .)
+    PNAME_LN        reduce using rule 28 (statement_expr -> nquery .)
+    PNAME_NS        reduce using rule 28 (statement_expr -> nquery .)
+    STRING          reduce using rule 28 (statement_expr -> nquery .)
+    INTEGER         reduce using rule 28 (statement_expr -> nquery .)
+    DECIMAL         reduce using rule 28 (statement_expr -> nquery .)
+    DOUBLE          reduce using rule 28 (statement_expr -> nquery .)
+    FLOAT           reduce using rule 28 (statement_expr -> nquery .)
+    BOOLEAN         reduce using rule 28 (statement_expr -> nquery .)
+    $end            reduce using rule 28 (statement_expr -> nquery .)
+    RULES           reduce using rule 28 (statement_expr -> nquery .)
+    FACTS           reduce using rule 28 (statement_expr -> nquery .)
+    CONSTRAINTS     reduce using rule 28 (statement_expr -> nquery .)
+    QUERIES         reduce using rule 28 (statement_expr -> nquery .)
+
+
+state 28
+
+    (29) statement_expr -> fact .
+
+    LABEL           reduce using rule 29 (statement_expr -> fact .)
+    ABSURD_MARK     reduce using rule 29 (statement_expr -> fact .)
+    START_STATEMENT_MARK reduce using rule 29 (statement_expr -> fact .)
+    QUESTION_MARK   reduce using rule 29 (statement_expr -> fact .)
+    L_IDENT         reduce using rule 29 (statement_expr -> fact .)
+    IRIREF          reduce using rule 29 (statement_expr -> fact .)
+    U_IDENT         reduce using rule 29 (statement_expr -> fact .)
+    BLANK_NODE_LABEL reduce using rule 29 (statement_expr -> fact .)
+    PNAME_LN        reduce using rule 29 (statement_expr -> fact .)
+    PNAME_NS        reduce using rule 29 (statement_expr -> fact .)
+    STRING          reduce using rule 29 (statement_expr -> fact .)
+    INTEGER         reduce using rule 29 (statement_expr -> fact .)
+    DECIMAL         reduce using rule 29 (statement_expr -> fact .)
+    DOUBLE          reduce using rule 29 (statement_expr -> fact .)
+    FLOAT           reduce using rule 29 (statement_expr -> fact .)
+    BOOLEAN         reduce using rule 29 (statement_expr -> fact .)
+    $end            reduce using rule 29 (statement_expr -> fact .)
+    RULES           reduce using rule 29 (statement_expr -> fact .)
+    FACTS           reduce using rule 29 (statement_expr -> fact .)
+    CONSTRAINTS     reduce using rule 29 (statement_expr -> fact .)
+    QUERIES         reduce using rule 29 (statement_expr -> fact .)
+
+
+state 29
+
+    (40) constraint -> ABSURD_MARK . RULE_MARK conjunction_atoms END_MARK
+
+    RULE_MARK       shift and go to state 64
+
+
+state 30
+
+    (34) rule -> conjunction_atoms . RULE_MARK conjunction_atoms_or_empty END_MARK
+    (41) fact -> conjunction_atoms . END_MARK
+
+    RULE_MARK       shift and go to state 65
+    END_MARK        shift and go to state 66
+
+
+state 31
+
+    (35) drule -> START_STATEMENT_MARK . conjunction_csf_list END_STATEMENT_MARK RULE_MARK conjunction_atoms_or_empty END_MARK
+    (36) conjunction_csf_list -> . conjunction_csf
+    (37) conjunction_csf_list -> . conjunction_csf SEPARATOR conjunction_csf_list
+    (38) conjunction_csf -> . atom
+    (39) conjunction_csf -> . START_TERMS_MARK conjunction_atoms END_TERMS_MARK
+    (51) atom -> . equality
+    (52) atom -> . std_atom
+    (53) equality -> . term EQUALITY_MARK term
+    (54) std_atom -> . predicate START_TERMS_MARK term_list END_TERMS_MARK
+    (59) term -> . constant
+    (60) term -> . variable
+    (61) predicate -> . prefixed_name
+    (62) predicate -> . L_IDENT
+    (63) predicate -> . IRIREF
+    (64) constant -> . prefixed_name
+    (65) constant -> . L_IDENT
+    (66) constant -> . IRIREF
+    (67) constant -> . literal
+    (68) variable -> . U_IDENT
+    (69) variable -> . BLANK_NODE_LABEL
+    (70) prefixed_name -> . PNAME_LN
+    (71) prefixed_name -> . PNAME_NS
+    (72) literal -> . rdf_literal
+    (73) literal -> . numeric_literal
+    (74) literal -> . boolean_literal
+    (76) rdf_literal -> . STRING TOPTOP iri
+    (77) rdf_literal -> . STRING LANGTAG
+    (78) rdf_literal -> . STRING
+    (79) numeric_literal -> . INTEGER
+    (80) numeric_literal -> . DECIMAL
+    (81) numeric_literal -> . DOUBLE
+    (82) numeric_literal -> . FLOAT
+    (75) boolean_literal -> . BOOLEAN
+
+    START_TERMS_MARK shift and go to state 70
+    L_IDENT         shift and go to state 12
+    IRIREF          shift and go to state 8
+    U_IDENT         shift and go to state 42
+    BLANK_NODE_LABEL shift and go to state 43
+    PNAME_LN        shift and go to state 44
+    PNAME_NS        shift and go to state 10
+    STRING          shift and go to state 48
+    INTEGER         shift and go to state 49
+    DECIMAL         shift and go to state 50
+    DOUBLE          shift and go to state 51
+    FLOAT           shift and go to state 52
+    BOOLEAN         shift and go to state 53
+
+    conjunction_csf_list           shift and go to state 67
+    conjunction_csf                shift and go to state 68
+    atom                           shift and go to state 69
+    equality                       shift and go to state 34
+    std_atom                       shift and go to state 35
+    term                           shift and go to state 36
+    predicate                      shift and go to state 37
+    constant                       shift and go to state 38
+    variable                       shift and go to state 39
+    prefixed_name                  shift and go to state 40
+    literal                        shift and go to state 41
+    rdf_literal                    shift and go to state 45
+    numeric_literal                shift and go to state 46
+    boolean_literal                shift and go to state 47
+
+state 32
+
+    (30) cquery -> QUESTION_MARK . START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_atoms_or_empty END_MARK
+    (31) cquery -> QUESTION_MARK . RULE_MARK conjunction_atoms_or_empty END_MARK
+    (32) nquery -> QUESTION_MARK . START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_neg END_MARK
+    (33) nquery -> QUESTION_MARK . RULE_MARK conjunction_neg END_MARK
+
+    START_TERMS_MARK shift and go to state 71
+    RULE_MARK       shift and go to state 72
+
+
+state 33
+
+    (46) conjunction_atoms -> atom .
+    (47) conjunction_atoms -> atom . SEPARATOR conjunction_atoms
+
+    RULE_MARK       reduce using rule 46 (conjunction_atoms -> atom .)
+    END_MARK        reduce using rule 46 (conjunction_atoms -> atom .)
+    END_TERMS_MARK  reduce using rule 46 (conjunction_atoms -> atom .)
+    SEPARATOR       shift and go to state 73
+
+
+state 34
+
+    (51) atom -> equality .
+
+    SEPARATOR       reduce using rule 51 (atom -> equality .)
+    RULE_MARK       reduce using rule 51 (atom -> equality .)
+    END_MARK        reduce using rule 51 (atom -> equality .)
+    END_STATEMENT_MARK reduce using rule 51 (atom -> equality .)
+    END_TERMS_MARK  reduce using rule 51 (atom -> equality .)
+
+
+state 35
+
+    (52) atom -> std_atom .
+
+    SEPARATOR       reduce using rule 52 (atom -> std_atom .)
+    RULE_MARK       reduce using rule 52 (atom -> std_atom .)
+    END_MARK        reduce using rule 52 (atom -> std_atom .)
+    END_STATEMENT_MARK reduce using rule 52 (atom -> std_atom .)
+    END_TERMS_MARK  reduce using rule 52 (atom -> std_atom .)
+
+
+state 36
+
+    (53) equality -> term . EQUALITY_MARK term
+
+    EQUALITY_MARK   shift and go to state 74
+
+
+state 37
+
+    (54) std_atom -> predicate . START_TERMS_MARK term_list END_TERMS_MARK
+
+    START_TERMS_MARK shift and go to state 75
+
+
+state 38
+
+    (59) term -> constant .
+
+    EQUALITY_MARK   reduce using rule 59 (term -> constant .)
+    SEPARATOR       reduce using rule 59 (term -> constant .)
+    END_TERMS_MARK  reduce using rule 59 (term -> constant .)
+    RULE_MARK       reduce using rule 59 (term -> constant .)
+    END_MARK        reduce using rule 59 (term -> constant .)
+    END_STATEMENT_MARK reduce using rule 59 (term -> constant .)
+
+
+state 39
+
+    (60) term -> variable .
+
+    EQUALITY_MARK   reduce using rule 60 (term -> variable .)
+    SEPARATOR       reduce using rule 60 (term -> variable .)
+    END_TERMS_MARK  reduce using rule 60 (term -> variable .)
+    RULE_MARK       reduce using rule 60 (term -> variable .)
+    END_MARK        reduce using rule 60 (term -> variable .)
+    END_STATEMENT_MARK reduce using rule 60 (term -> variable .)
+
+
+state 40
+
+    (61) predicate -> prefixed_name .
+    (64) constant -> prefixed_name .
+
+    START_TERMS_MARK reduce using rule 61 (predicate -> prefixed_name .)
+    EQUALITY_MARK   reduce using rule 64 (constant -> prefixed_name .)
+
+
+state 41
+
+    (67) constant -> literal .
+
+    EQUALITY_MARK   reduce using rule 67 (constant -> literal .)
+    SEPARATOR       reduce using rule 67 (constant -> literal .)
+    END_TERMS_MARK  reduce using rule 67 (constant -> literal .)
+    RULE_MARK       reduce using rule 67 (constant -> literal .)
+    END_MARK        reduce using rule 67 (constant -> literal .)
+    END_STATEMENT_MARK reduce using rule 67 (constant -> literal .)
+
+
+state 42
+
+    (68) variable -> U_IDENT .
+
+    EQUALITY_MARK   reduce using rule 68 (variable -> U_IDENT .)
+    SEPARATOR       reduce using rule 68 (variable -> U_IDENT .)
+    END_TERMS_MARK  reduce using rule 68 (variable -> U_IDENT .)
+    RULE_MARK       reduce using rule 68 (variable -> U_IDENT .)
+    END_MARK        reduce using rule 68 (variable -> U_IDENT .)
+    END_STATEMENT_MARK reduce using rule 68 (variable -> U_IDENT .)
+
+
+state 43
+
+    (69) variable -> BLANK_NODE_LABEL .
+
+    EQUALITY_MARK   reduce using rule 69 (variable -> BLANK_NODE_LABEL .)
+    SEPARATOR       reduce using rule 69 (variable -> BLANK_NODE_LABEL .)
+    END_TERMS_MARK  reduce using rule 69 (variable -> BLANK_NODE_LABEL .)
+    RULE_MARK       reduce using rule 69 (variable -> BLANK_NODE_LABEL .)
+    END_MARK        reduce using rule 69 (variable -> BLANK_NODE_LABEL .)
+    END_STATEMENT_MARK reduce using rule 69 (variable -> BLANK_NODE_LABEL .)
+
+
+state 44
+
+    (70) prefixed_name -> PNAME_LN .
+
+    START_TERMS_MARK reduce using rule 70 (prefixed_name -> PNAME_LN .)
+    EQUALITY_MARK   reduce using rule 70 (prefixed_name -> PNAME_LN .)
+    SEPARATOR       reduce using rule 70 (prefixed_name -> PNAME_LN .)
+    END_TERMS_MARK  reduce using rule 70 (prefixed_name -> PNAME_LN .)
+    RULE_MARK       reduce using rule 70 (prefixed_name -> PNAME_LN .)
+    END_MARK        reduce using rule 70 (prefixed_name -> PNAME_LN .)
+    END_STATEMENT_MARK reduce using rule 70 (prefixed_name -> PNAME_LN .)
+
+
+state 45
+
+    (72) literal -> rdf_literal .
+
+    EQUALITY_MARK   reduce using rule 72 (literal -> rdf_literal .)
+    SEPARATOR       reduce using rule 72 (literal -> rdf_literal .)
+    END_TERMS_MARK  reduce using rule 72 (literal -> rdf_literal .)
+    RULE_MARK       reduce using rule 72 (literal -> rdf_literal .)
+    END_MARK        reduce using rule 72 (literal -> rdf_literal .)
+    END_STATEMENT_MARK reduce using rule 72 (literal -> rdf_literal .)
+
+
+state 46
+
+    (73) literal -> numeric_literal .
+
+    EQUALITY_MARK   reduce using rule 73 (literal -> numeric_literal .)
+    SEPARATOR       reduce using rule 73 (literal -> numeric_literal .)
+    END_TERMS_MARK  reduce using rule 73 (literal -> numeric_literal .)
+    RULE_MARK       reduce using rule 73 (literal -> numeric_literal .)
+    END_MARK        reduce using rule 73 (literal -> numeric_literal .)
+    END_STATEMENT_MARK reduce using rule 73 (literal -> numeric_literal .)
+
+
+state 47
+
+    (74) literal -> boolean_literal .
+
+    EQUALITY_MARK   reduce using rule 74 (literal -> boolean_literal .)
+    SEPARATOR       reduce using rule 74 (literal -> boolean_literal .)
+    END_TERMS_MARK  reduce using rule 74 (literal -> boolean_literal .)
+    RULE_MARK       reduce using rule 74 (literal -> boolean_literal .)
+    END_MARK        reduce using rule 74 (literal -> boolean_literal .)
+    END_STATEMENT_MARK reduce using rule 74 (literal -> boolean_literal .)
+
+
+state 48
+
+    (76) rdf_literal -> STRING . TOPTOP iri
+    (77) rdf_literal -> STRING . LANGTAG
+    (78) rdf_literal -> STRING .
+
+    TOPTOP          shift and go to state 76
+    LANGTAG         shift and go to state 77
+    EQUALITY_MARK   reduce using rule 78 (rdf_literal -> STRING .)
+    SEPARATOR       reduce using rule 78 (rdf_literal -> STRING .)
+    END_TERMS_MARK  reduce using rule 78 (rdf_literal -> STRING .)
+    RULE_MARK       reduce using rule 78 (rdf_literal -> STRING .)
+    END_MARK        reduce using rule 78 (rdf_literal -> STRING .)
+    END_STATEMENT_MARK reduce using rule 78 (rdf_literal -> STRING .)
+
+
+state 49
+
+    (79) numeric_literal -> INTEGER .
+
+    EQUALITY_MARK   reduce using rule 79 (numeric_literal -> INTEGER .)
+    SEPARATOR       reduce using rule 79 (numeric_literal -> INTEGER .)
+    END_TERMS_MARK  reduce using rule 79 (numeric_literal -> INTEGER .)
+    RULE_MARK       reduce using rule 79 (numeric_literal -> INTEGER .)
+    END_MARK        reduce using rule 79 (numeric_literal -> INTEGER .)
+    END_STATEMENT_MARK reduce using rule 79 (numeric_literal -> INTEGER .)
+
+
+state 50
+
+    (80) numeric_literal -> DECIMAL .
+
+    EQUALITY_MARK   reduce using rule 80 (numeric_literal -> DECIMAL .)
+    SEPARATOR       reduce using rule 80 (numeric_literal -> DECIMAL .)
+    END_TERMS_MARK  reduce using rule 80 (numeric_literal -> DECIMAL .)
+    RULE_MARK       reduce using rule 80 (numeric_literal -> DECIMAL .)
+    END_MARK        reduce using rule 80 (numeric_literal -> DECIMAL .)
+    END_STATEMENT_MARK reduce using rule 80 (numeric_literal -> DECIMAL .)
+
+
+state 51
+
+    (81) numeric_literal -> DOUBLE .
+
+    EQUALITY_MARK   reduce using rule 81 (numeric_literal -> DOUBLE .)
+    SEPARATOR       reduce using rule 81 (numeric_literal -> DOUBLE .)
+    END_TERMS_MARK  reduce using rule 81 (numeric_literal -> DOUBLE .)
+    RULE_MARK       reduce using rule 81 (numeric_literal -> DOUBLE .)
+    END_MARK        reduce using rule 81 (numeric_literal -> DOUBLE .)
+    END_STATEMENT_MARK reduce using rule 81 (numeric_literal -> DOUBLE .)
+
+
+state 52
+
+    (82) numeric_literal -> FLOAT .
+
+    EQUALITY_MARK   reduce using rule 82 (numeric_literal -> FLOAT .)
+    SEPARATOR       reduce using rule 82 (numeric_literal -> FLOAT .)
+    END_TERMS_MARK  reduce using rule 82 (numeric_literal -> FLOAT .)
+    RULE_MARK       reduce using rule 82 (numeric_literal -> FLOAT .)
+    END_MARK        reduce using rule 82 (numeric_literal -> FLOAT .)
+    END_STATEMENT_MARK reduce using rule 82 (numeric_literal -> FLOAT .)
+
+
+state 53
+
+    (75) boolean_literal -> BOOLEAN .
+
+    EQUALITY_MARK   reduce using rule 75 (boolean_literal -> BOOLEAN .)
+    SEPARATOR       reduce using rule 75 (boolean_literal -> BOOLEAN .)
+    END_TERMS_MARK  reduce using rule 75 (boolean_literal -> BOOLEAN .)
+    RULE_MARK       reduce using rule 75 (boolean_literal -> BOOLEAN .)
+    END_MARK        reduce using rule 75 (boolean_literal -> BOOLEAN .)
+    END_STATEMENT_MARK reduce using rule 75 (boolean_literal -> BOOLEAN .)
+
+
+state 54
+
+    (1) document -> header body .
+
+    $end            reduce using rule 1 (document -> header body .)
+
+
+state 55
+
+    (4) header -> header_one header .
+
+    LABEL           reduce using rule 4 (header -> header_one header .)
+    RULES           reduce using rule 4 (header -> header_one header .)
+    FACTS           reduce using rule 4 (header -> header_one header .)
+    CONSTRAINTS     reduce using rule 4 (header -> header_one header .)
+    QUERIES         reduce using rule 4 (header -> header_one header .)
+    ABSURD_MARK     reduce using rule 4 (header -> header_one header .)
+    START_STATEMENT_MARK reduce using rule 4 (header -> header_one header .)
+    QUESTION_MARK   reduce using rule 4 (header -> header_one header .)
+    L_IDENT         reduce using rule 4 (header -> header_one header .)
+    IRIREF          reduce using rule 4 (header -> header_one header .)
+    U_IDENT         reduce using rule 4 (header -> header_one header .)
+    BLANK_NODE_LABEL reduce using rule 4 (header -> header_one header .)
+    PNAME_LN        reduce using rule 4 (header -> header_one header .)
+    PNAME_NS        reduce using rule 4 (header -> header_one header .)
+    STRING          reduce using rule 4 (header -> header_one header .)
+    INTEGER         reduce using rule 4 (header -> header_one header .)
+    DECIMAL         reduce using rule 4 (header -> header_one header .)
+    DOUBLE          reduce using rule 4 (header -> header_one header .)
+    FLOAT           reduce using rule 4 (header -> header_one header .)
+    BOOLEAN         reduce using rule 4 (header -> header_one header .)
+
+
+state 56
+
+    (5) header_one -> BASE IRIREF .
+
+    BASE            reduce using rule 5 (header_one -> BASE IRIREF .)
+    PREFIX          reduce using rule 5 (header_one -> BASE IRIREF .)
+    TOP             reduce using rule 5 (header_one -> BASE IRIREF .)
+    UNA             reduce using rule 5 (header_one -> BASE IRIREF .)
+    LABEL           reduce using rule 5 (header_one -> BASE IRIREF .)
+    RULES           reduce using rule 5 (header_one -> BASE IRIREF .)
+    FACTS           reduce using rule 5 (header_one -> BASE IRIREF .)
+    CONSTRAINTS     reduce using rule 5 (header_one -> BASE IRIREF .)
+    QUERIES         reduce using rule 5 (header_one -> BASE IRIREF .)
+    ABSURD_MARK     reduce using rule 5 (header_one -> BASE IRIREF .)
+    START_STATEMENT_MARK reduce using rule 5 (header_one -> BASE IRIREF .)
+    QUESTION_MARK   reduce using rule 5 (header_one -> BASE IRIREF .)
+    L_IDENT         reduce using rule 5 (header_one -> BASE IRIREF .)
+    IRIREF          reduce using rule 5 (header_one -> BASE IRIREF .)
+    U_IDENT         reduce using rule 5 (header_one -> BASE IRIREF .)
+    BLANK_NODE_LABEL reduce using rule 5 (header_one -> BASE IRIREF .)
+    PNAME_LN        reduce using rule 5 (header_one -> BASE IRIREF .)
+    PNAME_NS        reduce using rule 5 (header_one -> BASE IRIREF .)
+    STRING          reduce using rule 5 (header_one -> BASE IRIREF .)
+    INTEGER         reduce using rule 5 (header_one -> BASE IRIREF .)
+    DECIMAL         reduce using rule 5 (header_one -> BASE IRIREF .)
+    DOUBLE          reduce using rule 5 (header_one -> BASE IRIREF .)
+    FLOAT           reduce using rule 5 (header_one -> BASE IRIREF .)
+    BOOLEAN         reduce using rule 5 (header_one -> BASE IRIREF .)
+
+
+state 57
+
+    (6) header_one -> PREFIX PNAME_NS . IRIREF
+
+    IRIREF          shift and go to state 78
+
+
+state 58
+
+    (7) header_one -> TOP L_IDENT .
+
+    BASE            reduce using rule 7 (header_one -> TOP L_IDENT .)
+    PREFIX          reduce using rule 7 (header_one -> TOP L_IDENT .)
+    TOP             reduce using rule 7 (header_one -> TOP L_IDENT .)
+    UNA             reduce using rule 7 (header_one -> TOP L_IDENT .)
+    LABEL           reduce using rule 7 (header_one -> TOP L_IDENT .)
+    RULES           reduce using rule 7 (header_one -> TOP L_IDENT .)
+    FACTS           reduce using rule 7 (header_one -> TOP L_IDENT .)
+    CONSTRAINTS     reduce using rule 7 (header_one -> TOP L_IDENT .)
+    QUERIES         reduce using rule 7 (header_one -> TOP L_IDENT .)
+    ABSURD_MARK     reduce using rule 7 (header_one -> TOP L_IDENT .)
+    START_STATEMENT_MARK reduce using rule 7 (header_one -> TOP L_IDENT .)
+    QUESTION_MARK   reduce using rule 7 (header_one -> TOP L_IDENT .)
+    L_IDENT         reduce using rule 7 (header_one -> TOP L_IDENT .)
+    IRIREF          reduce using rule 7 (header_one -> TOP L_IDENT .)
+    U_IDENT         reduce using rule 7 (header_one -> TOP L_IDENT .)
+    BLANK_NODE_LABEL reduce using rule 7 (header_one -> TOP L_IDENT .)
+    PNAME_LN        reduce using rule 7 (header_one -> TOP L_IDENT .)
+    PNAME_NS        reduce using rule 7 (header_one -> TOP L_IDENT .)
+    STRING          reduce using rule 7 (header_one -> TOP L_IDENT .)
+    INTEGER         reduce using rule 7 (header_one -> TOP L_IDENT .)
+    DECIMAL         reduce using rule 7 (header_one -> TOP L_IDENT .)
+    DOUBLE          reduce using rule 7 (header_one -> TOP L_IDENT .)
+    FLOAT           reduce using rule 7 (header_one -> TOP L_IDENT .)
+    BOOLEAN         reduce using rule 7 (header_one -> TOP L_IDENT .)
+
+
+state 59
+
+    (8) header_one -> TOP IRIREF .
+
+    BASE            reduce using rule 8 (header_one -> TOP IRIREF .)
+    PREFIX          reduce using rule 8 (header_one -> TOP IRIREF .)
+    TOP             reduce using rule 8 (header_one -> TOP IRIREF .)
+    UNA             reduce using rule 8 (header_one -> TOP IRIREF .)
+    LABEL           reduce using rule 8 (header_one -> TOP IRIREF .)
+    RULES           reduce using rule 8 (header_one -> TOP IRIREF .)
+    FACTS           reduce using rule 8 (header_one -> TOP IRIREF .)
+    CONSTRAINTS     reduce using rule 8 (header_one -> TOP IRIREF .)
+    QUERIES         reduce using rule 8 (header_one -> TOP IRIREF .)
+    ABSURD_MARK     reduce using rule 8 (header_one -> TOP IRIREF .)
+    START_STATEMENT_MARK reduce using rule 8 (header_one -> TOP IRIREF .)
+    QUESTION_MARK   reduce using rule 8 (header_one -> TOP IRIREF .)
+    L_IDENT         reduce using rule 8 (header_one -> TOP IRIREF .)
+    IRIREF          reduce using rule 8 (header_one -> TOP IRIREF .)
+    U_IDENT         reduce using rule 8 (header_one -> TOP IRIREF .)
+    BLANK_NODE_LABEL reduce using rule 8 (header_one -> TOP IRIREF .)
+    PNAME_LN        reduce using rule 8 (header_one -> TOP IRIREF .)
+    PNAME_NS        reduce using rule 8 (header_one -> TOP IRIREF .)
+    STRING          reduce using rule 8 (header_one -> TOP IRIREF .)
+    INTEGER         reduce using rule 8 (header_one -> TOP IRIREF .)
+    DECIMAL         reduce using rule 8 (header_one -> TOP IRIREF .)
+    DOUBLE          reduce using rule 8 (header_one -> TOP IRIREF .)
+    FLOAT           reduce using rule 8 (header_one -> TOP IRIREF .)
+    BOOLEAN         reduce using rule 8 (header_one -> TOP IRIREF .)
+
+
+state 60
+
+    (13) section_list -> section section_list .
+
+    $end            reduce using rule 13 (section_list -> section section_list .)
+
+
+state 61
+
+    (21) statement_list -> statement statement_list .
+
+    $end            reduce using rule 21 (statement_list -> statement statement_list .)
+    RULES           reduce using rule 21 (statement_list -> statement statement_list .)
+    FACTS           reduce using rule 21 (statement_list -> statement statement_list .)
+    CONSTRAINTS     reduce using rule 21 (statement_list -> statement statement_list .)
+    QUERIES         reduce using rule 21 (statement_list -> statement statement_list .)
+
+
+state 62
+
+    (15) section -> annotation statement_list .
+
+    RULES           reduce using rule 15 (section -> annotation statement_list .)
+    FACTS           reduce using rule 15 (section -> annotation statement_list .)
+    CONSTRAINTS     reduce using rule 15 (section -> annotation statement_list .)
+    QUERIES         reduce using rule 15 (section -> annotation statement_list .)
+    $end            reduce using rule 15 (section -> annotation statement_list .)
+
+
+state 63
+
+    (23) statement -> LABEL statement_expr .
+
+    LABEL           reduce using rule 23 (statement -> LABEL statement_expr .)
+    ABSURD_MARK     reduce using rule 23 (statement -> LABEL statement_expr .)
+    START_STATEMENT_MARK reduce using rule 23 (statement -> LABEL statement_expr .)
+    QUESTION_MARK   reduce using rule 23 (statement -> LABEL statement_expr .)
+    L_IDENT         reduce using rule 23 (statement -> LABEL statement_expr .)
+    IRIREF          reduce using rule 23 (statement -> LABEL statement_expr .)
+    U_IDENT         reduce using rule 23 (statement -> LABEL statement_expr .)
+    BLANK_NODE_LABEL reduce using rule 23 (statement -> LABEL statement_expr .)
+    PNAME_LN        reduce using rule 23 (statement -> LABEL statement_expr .)
+    PNAME_NS        reduce using rule 23 (statement -> LABEL statement_expr .)
+    STRING          reduce using rule 23 (statement -> LABEL statement_expr .)
+    INTEGER         reduce using rule 23 (statement -> LABEL statement_expr .)
+    DECIMAL         reduce using rule 23 (statement -> LABEL statement_expr .)
+    DOUBLE          reduce using rule 23 (statement -> LABEL statement_expr .)
+    FLOAT           reduce using rule 23 (statement -> LABEL statement_expr .)
+    BOOLEAN         reduce using rule 23 (statement -> LABEL statement_expr .)
+    $end            reduce using rule 23 (statement -> LABEL statement_expr .)
+    RULES           reduce using rule 23 (statement -> LABEL statement_expr .)
+    FACTS           reduce using rule 23 (statement -> LABEL statement_expr .)
+    CONSTRAINTS     reduce using rule 23 (statement -> LABEL statement_expr .)
+    QUERIES         reduce using rule 23 (statement -> LABEL statement_expr .)
+
+
+state 64
+
+    (40) constraint -> ABSURD_MARK RULE_MARK . conjunction_atoms END_MARK
+    (46) conjunction_atoms -> . atom
+    (47) conjunction_atoms -> . atom SEPARATOR conjunction_atoms
+    (51) atom -> . equality
+    (52) atom -> . std_atom
+    (53) equality -> . term EQUALITY_MARK term
+    (54) std_atom -> . predicate START_TERMS_MARK term_list END_TERMS_MARK
+    (59) term -> . constant
+    (60) term -> . variable
+    (61) predicate -> . prefixed_name
+    (62) predicate -> . L_IDENT
+    (63) predicate -> . IRIREF
+    (64) constant -> . prefixed_name
+    (65) constant -> . L_IDENT
+    (66) constant -> . IRIREF
+    (67) constant -> . literal
+    (68) variable -> . U_IDENT
+    (69) variable -> . BLANK_NODE_LABEL
+    (70) prefixed_name -> . PNAME_LN
+    (71) prefixed_name -> . PNAME_NS
+    (72) literal -> . rdf_literal
+    (73) literal -> . numeric_literal
+    (74) literal -> . boolean_literal
+    (76) rdf_literal -> . STRING TOPTOP iri
+    (77) rdf_literal -> . STRING LANGTAG
+    (78) rdf_literal -> . STRING
+    (79) numeric_literal -> . INTEGER
+    (80) numeric_literal -> . DECIMAL
+    (81) numeric_literal -> . DOUBLE
+    (82) numeric_literal -> . FLOAT
+    (75) boolean_literal -> . BOOLEAN
+
+    L_IDENT         shift and go to state 12
+    IRIREF          shift and go to state 8
+    U_IDENT         shift and go to state 42
+    BLANK_NODE_LABEL shift and go to state 43
+    PNAME_LN        shift and go to state 44
+    PNAME_NS        shift and go to state 10
+    STRING          shift and go to state 48
+    INTEGER         shift and go to state 49
+    DECIMAL         shift and go to state 50
+    DOUBLE          shift and go to state 51
+    FLOAT           shift and go to state 52
+    BOOLEAN         shift and go to state 53
+
+    conjunction_atoms              shift and go to state 79
+    atom                           shift and go to state 33
+    equality                       shift and go to state 34
+    std_atom                       shift and go to state 35
+    term                           shift and go to state 36
+    predicate                      shift and go to state 37
+    constant                       shift and go to state 38
+    variable                       shift and go to state 39
+    prefixed_name                  shift and go to state 40
+    literal                        shift and go to state 41
+    rdf_literal                    shift and go to state 45
+    numeric_literal                shift and go to state 46
+    boolean_literal                shift and go to state 47
+
+state 65
+
+    (34) rule -> conjunction_atoms RULE_MARK . conjunction_atoms_or_empty END_MARK
+    (48) conjunction_atoms_or_empty -> . conjunction_atoms
+    (49) conjunction_atoms_or_empty -> . empty
+    (46) conjunction_atoms -> . atom
+    (47) conjunction_atoms -> . atom SEPARATOR conjunction_atoms
+    (85) empty -> .
+    (51) atom -> . equality
+    (52) atom -> . std_atom
+    (53) equality -> . term EQUALITY_MARK term
+    (54) std_atom -> . predicate START_TERMS_MARK term_list END_TERMS_MARK
+    (59) term -> . constant
+    (60) term -> . variable
+    (61) predicate -> . prefixed_name
+    (62) predicate -> . L_IDENT
+    (63) predicate -> . IRIREF
+    (64) constant -> . prefixed_name
+    (65) constant -> . L_IDENT
+    (66) constant -> . IRIREF
+    (67) constant -> . literal
+    (68) variable -> . U_IDENT
+    (69) variable -> . BLANK_NODE_LABEL
+    (70) prefixed_name -> . PNAME_LN
+    (71) prefixed_name -> . PNAME_NS
+    (72) literal -> . rdf_literal
+    (73) literal -> . numeric_literal
+    (74) literal -> . boolean_literal
+    (76) rdf_literal -> . STRING TOPTOP iri
+    (77) rdf_literal -> . STRING LANGTAG
+    (78) rdf_literal -> . STRING
+    (79) numeric_literal -> . INTEGER
+    (80) numeric_literal -> . DECIMAL
+    (81) numeric_literal -> . DOUBLE
+    (82) numeric_literal -> . FLOAT
+    (75) boolean_literal -> . BOOLEAN
+
+    END_MARK        reduce using rule 85 (empty -> .)
+    L_IDENT         shift and go to state 12
+    IRIREF          shift and go to state 8
+    U_IDENT         shift and go to state 42
+    BLANK_NODE_LABEL shift and go to state 43
+    PNAME_LN        shift and go to state 44
+    PNAME_NS        shift and go to state 10
+    STRING          shift and go to state 48
+    INTEGER         shift and go to state 49
+    DECIMAL         shift and go to state 50
+    DOUBLE          shift and go to state 51
+    FLOAT           shift and go to state 52
+    BOOLEAN         shift and go to state 53
+
+    conjunction_atoms              shift and go to state 80
+    conjunction_atoms_or_empty     shift and go to state 81
+    empty                          shift and go to state 82
+    atom                           shift and go to state 33
+    equality                       shift and go to state 34
+    std_atom                       shift and go to state 35
+    term                           shift and go to state 36
+    predicate                      shift and go to state 37
+    constant                       shift and go to state 38
+    variable                       shift and go to state 39
+    prefixed_name                  shift and go to state 40
+    literal                        shift and go to state 41
+    rdf_literal                    shift and go to state 45
+    numeric_literal                shift and go to state 46
+    boolean_literal                shift and go to state 47
+
+state 66
+
+    (41) fact -> conjunction_atoms END_MARK .
+
+    LABEL           reduce using rule 41 (fact -> conjunction_atoms END_MARK .)
+    ABSURD_MARK     reduce using rule 41 (fact -> conjunction_atoms END_MARK .)
+    START_STATEMENT_MARK reduce using rule 41 (fact -> conjunction_atoms END_MARK .)
+    QUESTION_MARK   reduce using rule 41 (fact -> conjunction_atoms END_MARK .)
+    L_IDENT         reduce using rule 41 (fact -> conjunction_atoms END_MARK .)
+    IRIREF          reduce using rule 41 (fact -> conjunction_atoms END_MARK .)
+    U_IDENT         reduce using rule 41 (fact -> conjunction_atoms END_MARK .)
+    BLANK_NODE_LABEL reduce using rule 41 (fact -> conjunction_atoms END_MARK .)
+    PNAME_LN        reduce using rule 41 (fact -> conjunction_atoms END_MARK .)
+    PNAME_NS        reduce using rule 41 (fact -> conjunction_atoms END_MARK .)
+    STRING          reduce using rule 41 (fact -> conjunction_atoms END_MARK .)
+    INTEGER         reduce using rule 41 (fact -> conjunction_atoms END_MARK .)
+    DECIMAL         reduce using rule 41 (fact -> conjunction_atoms END_MARK .)
+    DOUBLE          reduce using rule 41 (fact -> conjunction_atoms END_MARK .)
+    FLOAT           reduce using rule 41 (fact -> conjunction_atoms END_MARK .)
+    BOOLEAN         reduce using rule 41 (fact -> conjunction_atoms END_MARK .)
+    $end            reduce using rule 41 (fact -> conjunction_atoms END_MARK .)
+    RULES           reduce using rule 41 (fact -> conjunction_atoms END_MARK .)
+    FACTS           reduce using rule 41 (fact -> conjunction_atoms END_MARK .)
+    CONSTRAINTS     reduce using rule 41 (fact -> conjunction_atoms END_MARK .)
+    QUERIES         reduce using rule 41 (fact -> conjunction_atoms END_MARK .)
+
+
+state 67
+
+    (35) drule -> START_STATEMENT_MARK conjunction_csf_list . END_STATEMENT_MARK RULE_MARK conjunction_atoms_or_empty END_MARK
+
+    END_STATEMENT_MARK shift and go to state 83
+
+
+state 68
+
+    (36) conjunction_csf_list -> conjunction_csf .
+    (37) conjunction_csf_list -> conjunction_csf . SEPARATOR conjunction_csf_list
+
+    END_STATEMENT_MARK reduce using rule 36 (conjunction_csf_list -> conjunction_csf .)
+    SEPARATOR       shift and go to state 84
+
+
+state 69
+
+    (38) conjunction_csf -> atom .
+
+    SEPARATOR       reduce using rule 38 (conjunction_csf -> atom .)
+    END_STATEMENT_MARK reduce using rule 38 (conjunction_csf -> atom .)
+
+
+state 70
+
+    (39) conjunction_csf -> START_TERMS_MARK . conjunction_atoms END_TERMS_MARK
+    (46) conjunction_atoms -> . atom
+    (47) conjunction_atoms -> . atom SEPARATOR conjunction_atoms
+    (51) atom -> . equality
+    (52) atom -> . std_atom
+    (53) equality -> . term EQUALITY_MARK term
+    (54) std_atom -> . predicate START_TERMS_MARK term_list END_TERMS_MARK
+    (59) term -> . constant
+    (60) term -> . variable
+    (61) predicate -> . prefixed_name
+    (62) predicate -> . L_IDENT
+    (63) predicate -> . IRIREF
+    (64) constant -> . prefixed_name
+    (65) constant -> . L_IDENT
+    (66) constant -> . IRIREF
+    (67) constant -> . literal
+    (68) variable -> . U_IDENT
+    (69) variable -> . BLANK_NODE_LABEL
+    (70) prefixed_name -> . PNAME_LN
+    (71) prefixed_name -> . PNAME_NS
+    (72) literal -> . rdf_literal
+    (73) literal -> . numeric_literal
+    (74) literal -> . boolean_literal
+    (76) rdf_literal -> . STRING TOPTOP iri
+    (77) rdf_literal -> . STRING LANGTAG
+    (78) rdf_literal -> . STRING
+    (79) numeric_literal -> . INTEGER
+    (80) numeric_literal -> . DECIMAL
+    (81) numeric_literal -> . DOUBLE
+    (82) numeric_literal -> . FLOAT
+    (75) boolean_literal -> . BOOLEAN
+
+    L_IDENT         shift and go to state 12
+    IRIREF          shift and go to state 8
+    U_IDENT         shift and go to state 42
+    BLANK_NODE_LABEL shift and go to state 43
+    PNAME_LN        shift and go to state 44
+    PNAME_NS        shift and go to state 10
+    STRING          shift and go to state 48
+    INTEGER         shift and go to state 49
+    DECIMAL         shift and go to state 50
+    DOUBLE          shift and go to state 51
+    FLOAT           shift and go to state 52
+    BOOLEAN         shift and go to state 53
+
+    conjunction_atoms              shift and go to state 85
+    atom                           shift and go to state 33
+    equality                       shift and go to state 34
+    std_atom                       shift and go to state 35
+    term                           shift and go to state 36
+    predicate                      shift and go to state 37
+    constant                       shift and go to state 38
+    variable                       shift and go to state 39
+    prefixed_name                  shift and go to state 40
+    literal                        shift and go to state 41
+    rdf_literal                    shift and go to state 45
+    numeric_literal                shift and go to state 46
+    boolean_literal                shift and go to state 47
+
+state 71
+
+    (30) cquery -> QUESTION_MARK START_TERMS_MARK . term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_atoms_or_empty END_MARK
+    (32) nquery -> QUESTION_MARK START_TERMS_MARK . term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_neg END_MARK
+    (55) term_list_or_empty -> . term_list
+    (56) term_list_or_empty -> . empty
+    (57) term_list -> . term
+    (58) term_list -> . term SEPARATOR term_list
+    (85) empty -> .
+    (59) term -> . constant
+    (60) term -> . variable
+    (64) constant -> . prefixed_name
+    (65) constant -> . L_IDENT
+    (66) constant -> . IRIREF
+    (67) constant -> . literal
+    (68) variable -> . U_IDENT
+    (69) variable -> . BLANK_NODE_LABEL
+    (70) prefixed_name -> . PNAME_LN
+    (71) prefixed_name -> . PNAME_NS
+    (72) literal -> . rdf_literal
+    (73) literal -> . numeric_literal
+    (74) literal -> . boolean_literal
+    (76) rdf_literal -> . STRING TOPTOP iri
+    (77) rdf_literal -> . STRING LANGTAG
+    (78) rdf_literal -> . STRING
+    (79) numeric_literal -> . INTEGER
+    (80) numeric_literal -> . DECIMAL
+    (81) numeric_literal -> . DOUBLE
+    (82) numeric_literal -> . FLOAT
+    (75) boolean_literal -> . BOOLEAN
+
+    END_TERMS_MARK  reduce using rule 85 (empty -> .)
+    L_IDENT         shift and go to state 91
+    IRIREF          shift and go to state 92
+    U_IDENT         shift and go to state 42
+    BLANK_NODE_LABEL shift and go to state 43
+    PNAME_LN        shift and go to state 44
+    PNAME_NS        shift and go to state 10
+    STRING          shift and go to state 48
+    INTEGER         shift and go to state 49
+    DECIMAL         shift and go to state 50
+    DOUBLE          shift and go to state 51
+    FLOAT           shift and go to state 52
+    BOOLEAN         shift and go to state 53
+
+    term_list_or_empty             shift and go to state 86
+    term_list                      shift and go to state 87
+    empty                          shift and go to state 88
+    term                           shift and go to state 89
+    constant                       shift and go to state 38
+    variable                       shift and go to state 39
+    prefixed_name                  shift and go to state 90
+    literal                        shift and go to state 41
+    rdf_literal                    shift and go to state 45
+    numeric_literal                shift and go to state 46
+    boolean_literal                shift and go to state 47
+
+state 72
+
+    (31) cquery -> QUESTION_MARK RULE_MARK . conjunction_atoms_or_empty END_MARK
+    (33) nquery -> QUESTION_MARK RULE_MARK . conjunction_neg END_MARK
+    (48) conjunction_atoms_or_empty -> . conjunction_atoms
+    (49) conjunction_atoms_or_empty -> . empty
+    (42) conjunction_neg -> . neg_literal
+    (43) conjunction_neg -> . neg_literal SEPARATOR conjunction_atoms
+    (44) conjunction_neg -> . atom SEPARATOR conjunction_neg
+    (45) conjunction_neg -> . neg_literal SEPARATOR conjunction_neg
+    (46) conjunction_atoms -> . atom
+    (47) conjunction_atoms -> . atom SEPARATOR conjunction_atoms
+    (85) empty -> .
+    (50) neg_literal -> . NEGATION std_atom
+    (51) atom -> . equality
+    (52) atom -> . std_atom
+    (53) equality -> . term EQUALITY_MARK term
+    (54) std_atom -> . predicate START_TERMS_MARK term_list END_TERMS_MARK
+    (59) term -> . constant
+    (60) term -> . variable
+    (61) predicate -> . prefixed_name
+    (62) predicate -> . L_IDENT
+    (63) predicate -> . IRIREF
+    (64) constant -> . prefixed_name
+    (65) constant -> . L_IDENT
+    (66) constant -> . IRIREF
+    (67) constant -> . literal
+    (68) variable -> . U_IDENT
+    (69) variable -> . BLANK_NODE_LABEL
+    (70) prefixed_name -> . PNAME_LN
+    (71) prefixed_name -> . PNAME_NS
+    (72) literal -> . rdf_literal
+    (73) literal -> . numeric_literal
+    (74) literal -> . boolean_literal
+    (76) rdf_literal -> . STRING TOPTOP iri
+    (77) rdf_literal -> . STRING LANGTAG
+    (78) rdf_literal -> . STRING
+    (79) numeric_literal -> . INTEGER
+    (80) numeric_literal -> . DECIMAL
+    (81) numeric_literal -> . DOUBLE
+    (82) numeric_literal -> . FLOAT
+    (75) boolean_literal -> . BOOLEAN
+
+    END_MARK        reduce using rule 85 (empty -> .)
+    NEGATION        shift and go to state 97
+    L_IDENT         shift and go to state 12
+    IRIREF          shift and go to state 8
+    U_IDENT         shift and go to state 42
+    BLANK_NODE_LABEL shift and go to state 43
+    PNAME_LN        shift and go to state 44
+    PNAME_NS        shift and go to state 10
+    STRING          shift and go to state 48
+    INTEGER         shift and go to state 49
+    DECIMAL         shift and go to state 50
+    DOUBLE          shift and go to state 51
+    FLOAT           shift and go to state 52
+    BOOLEAN         shift and go to state 53
+
+    conjunction_atoms_or_empty     shift and go to state 93
+    conjunction_neg                shift and go to state 94
+    conjunction_atoms              shift and go to state 80
+    empty                          shift and go to state 82
+    neg_literal                    shift and go to state 95
+    atom                           shift and go to state 96
+    std_atom                       shift and go to state 35
+    equality                       shift and go to state 34
+    term                           shift and go to state 36
+    predicate                      shift and go to state 37
+    constant                       shift and go to state 38
+    variable                       shift and go to state 39
+    prefixed_name                  shift and go to state 40
+    literal                        shift and go to state 41
+    rdf_literal                    shift and go to state 45
+    numeric_literal                shift and go to state 46
+    boolean_literal                shift and go to state 47
+
+state 73
+
+    (47) conjunction_atoms -> atom SEPARATOR . conjunction_atoms
+    (46) conjunction_atoms -> . atom
+    (47) conjunction_atoms -> . atom SEPARATOR conjunction_atoms
+    (51) atom -> . equality
+    (52) atom -> . std_atom
+    (53) equality -> . term EQUALITY_MARK term
+    (54) std_atom -> . predicate START_TERMS_MARK term_list END_TERMS_MARK
+    (59) term -> . constant
+    (60) term -> . variable
+    (61) predicate -> . prefixed_name
+    (62) predicate -> . L_IDENT
+    (63) predicate -> . IRIREF
+    (64) constant -> . prefixed_name
+    (65) constant -> . L_IDENT
+    (66) constant -> . IRIREF
+    (67) constant -> . literal
+    (68) variable -> . U_IDENT
+    (69) variable -> . BLANK_NODE_LABEL
+    (70) prefixed_name -> . PNAME_LN
+    (71) prefixed_name -> . PNAME_NS
+    (72) literal -> . rdf_literal
+    (73) literal -> . numeric_literal
+    (74) literal -> . boolean_literal
+    (76) rdf_literal -> . STRING TOPTOP iri
+    (77) rdf_literal -> . STRING LANGTAG
+    (78) rdf_literal -> . STRING
+    (79) numeric_literal -> . INTEGER
+    (80) numeric_literal -> . DECIMAL
+    (81) numeric_literal -> . DOUBLE
+    (82) numeric_literal -> . FLOAT
+    (75) boolean_literal -> . BOOLEAN
+
+    L_IDENT         shift and go to state 12
+    IRIREF          shift and go to state 8
+    U_IDENT         shift and go to state 42
+    BLANK_NODE_LABEL shift and go to state 43
+    PNAME_LN        shift and go to state 44
+    PNAME_NS        shift and go to state 10
+    STRING          shift and go to state 48
+    INTEGER         shift and go to state 49
+    DECIMAL         shift and go to state 50
+    DOUBLE          shift and go to state 51
+    FLOAT           shift and go to state 52
+    BOOLEAN         shift and go to state 53
+
+    atom                           shift and go to state 33
+    conjunction_atoms              shift and go to state 98
+    equality                       shift and go to state 34
+    std_atom                       shift and go to state 35
+    term                           shift and go to state 36
+    predicate                      shift and go to state 37
+    constant                       shift and go to state 38
+    variable                       shift and go to state 39
+    prefixed_name                  shift and go to state 40
+    literal                        shift and go to state 41
+    rdf_literal                    shift and go to state 45
+    numeric_literal                shift and go to state 46
+    boolean_literal                shift and go to state 47
+
+state 74
+
+    (53) equality -> term EQUALITY_MARK . term
+    (59) term -> . constant
+    (60) term -> . variable
+    (64) constant -> . prefixed_name
+    (65) constant -> . L_IDENT
+    (66) constant -> . IRIREF
+    (67) constant -> . literal
+    (68) variable -> . U_IDENT
+    (69) variable -> . BLANK_NODE_LABEL
+    (70) prefixed_name -> . PNAME_LN
+    (71) prefixed_name -> . PNAME_NS
+    (72) literal -> . rdf_literal
+    (73) literal -> . numeric_literal
+    (74) literal -> . boolean_literal
+    (76) rdf_literal -> . STRING TOPTOP iri
+    (77) rdf_literal -> . STRING LANGTAG
+    (78) rdf_literal -> . STRING
+    (79) numeric_literal -> . INTEGER
+    (80) numeric_literal -> . DECIMAL
+    (81) numeric_literal -> . DOUBLE
+    (82) numeric_literal -> . FLOAT
+    (75) boolean_literal -> . BOOLEAN
+
+    L_IDENT         shift and go to state 91
+    IRIREF          shift and go to state 92
+    U_IDENT         shift and go to state 42
+    BLANK_NODE_LABEL shift and go to state 43
+    PNAME_LN        shift and go to state 44
+    PNAME_NS        shift and go to state 10
+    STRING          shift and go to state 48
+    INTEGER         shift and go to state 49
+    DECIMAL         shift and go to state 50
+    DOUBLE          shift and go to state 51
+    FLOAT           shift and go to state 52
+    BOOLEAN         shift and go to state 53
+
+    term                           shift and go to state 99
+    constant                       shift and go to state 38
+    variable                       shift and go to state 39
+    prefixed_name                  shift and go to state 90
+    literal                        shift and go to state 41
+    rdf_literal                    shift and go to state 45
+    numeric_literal                shift and go to state 46
+    boolean_literal                shift and go to state 47
+
+state 75
+
+    (54) std_atom -> predicate START_TERMS_MARK . term_list END_TERMS_MARK
+    (57) term_list -> . term
+    (58) term_list -> . term SEPARATOR term_list
+    (59) term -> . constant
+    (60) term -> . variable
+    (64) constant -> . prefixed_name
+    (65) constant -> . L_IDENT
+    (66) constant -> . IRIREF
+    (67) constant -> . literal
+    (68) variable -> . U_IDENT
+    (69) variable -> . BLANK_NODE_LABEL
+    (70) prefixed_name -> . PNAME_LN
+    (71) prefixed_name -> . PNAME_NS
+    (72) literal -> . rdf_literal
+    (73) literal -> . numeric_literal
+    (74) literal -> . boolean_literal
+    (76) rdf_literal -> . STRING TOPTOP iri
+    (77) rdf_literal -> . STRING LANGTAG
+    (78) rdf_literal -> . STRING
+    (79) numeric_literal -> . INTEGER
+    (80) numeric_literal -> . DECIMAL
+    (81) numeric_literal -> . DOUBLE
+    (82) numeric_literal -> . FLOAT
+    (75) boolean_literal -> . BOOLEAN
+
+    L_IDENT         shift and go to state 91
+    IRIREF          shift and go to state 92
+    U_IDENT         shift and go to state 42
+    BLANK_NODE_LABEL shift and go to state 43
+    PNAME_LN        shift and go to state 44
+    PNAME_NS        shift and go to state 10
+    STRING          shift and go to state 48
+    INTEGER         shift and go to state 49
+    DECIMAL         shift and go to state 50
+    DOUBLE          shift and go to state 51
+    FLOAT           shift and go to state 52
+    BOOLEAN         shift and go to state 53
+
+    term_list                      shift and go to state 100
+    term                           shift and go to state 89
+    constant                       shift and go to state 38
+    variable                       shift and go to state 39
+    prefixed_name                  shift and go to state 90
+    literal                        shift and go to state 41
+    rdf_literal                    shift and go to state 45
+    numeric_literal                shift and go to state 46
+    boolean_literal                shift and go to state 47
+
+state 76
+
+    (76) rdf_literal -> STRING TOPTOP . iri
+    (83) iri -> . IRIREF
+    (84) iri -> . prefixed_name
+    (70) prefixed_name -> . PNAME_LN
+    (71) prefixed_name -> . PNAME_NS
+
+    IRIREF          shift and go to state 102
+    PNAME_LN        shift and go to state 44
+    PNAME_NS        shift and go to state 10
+
+    iri                            shift and go to state 101
+    prefixed_name                  shift and go to state 103
+
+state 77
+
+    (77) rdf_literal -> STRING LANGTAG .
+
+    EQUALITY_MARK   reduce using rule 77 (rdf_literal -> STRING LANGTAG .)
+    SEPARATOR       reduce using rule 77 (rdf_literal -> STRING LANGTAG .)
+    END_TERMS_MARK  reduce using rule 77 (rdf_literal -> STRING LANGTAG .)
+    RULE_MARK       reduce using rule 77 (rdf_literal -> STRING LANGTAG .)
+    END_MARK        reduce using rule 77 (rdf_literal -> STRING LANGTAG .)
+    END_STATEMENT_MARK reduce using rule 77 (rdf_literal -> STRING LANGTAG .)
+
+
+state 78
+
+    (6) header_one -> PREFIX PNAME_NS IRIREF .
+
+    BASE            reduce using rule 6 (header_one -> PREFIX PNAME_NS IRIREF .)
+    PREFIX          reduce using rule 6 (header_one -> PREFIX PNAME_NS IRIREF .)
+    TOP             reduce using rule 6 (header_one -> PREFIX PNAME_NS IRIREF .)
+    UNA             reduce using rule 6 (header_one -> PREFIX PNAME_NS IRIREF .)
+    LABEL           reduce using rule 6 (header_one -> PREFIX PNAME_NS IRIREF .)
+    RULES           reduce using rule 6 (header_one -> PREFIX PNAME_NS IRIREF .)
+    FACTS           reduce using rule 6 (header_one -> PREFIX PNAME_NS IRIREF .)
+    CONSTRAINTS     reduce using rule 6 (header_one -> PREFIX PNAME_NS IRIREF .)
+    QUERIES         reduce using rule 6 (header_one -> PREFIX PNAME_NS IRIREF .)
+    ABSURD_MARK     reduce using rule 6 (header_one -> PREFIX PNAME_NS IRIREF .)
+    START_STATEMENT_MARK reduce using rule 6 (header_one -> PREFIX PNAME_NS IRIREF .)
+    QUESTION_MARK   reduce using rule 6 (header_one -> PREFIX PNAME_NS IRIREF .)
+    L_IDENT         reduce using rule 6 (header_one -> PREFIX PNAME_NS IRIREF .)
+    IRIREF          reduce using rule 6 (header_one -> PREFIX PNAME_NS IRIREF .)
+    U_IDENT         reduce using rule 6 (header_one -> PREFIX PNAME_NS IRIREF .)
+    BLANK_NODE_LABEL reduce using rule 6 (header_one -> PREFIX PNAME_NS IRIREF .)
+    PNAME_LN        reduce using rule 6 (header_one -> PREFIX PNAME_NS IRIREF .)
+    PNAME_NS        reduce using rule 6 (header_one -> PREFIX PNAME_NS IRIREF .)
+    STRING          reduce using rule 6 (header_one -> PREFIX PNAME_NS IRIREF .)
+    INTEGER         reduce using rule 6 (header_one -> PREFIX PNAME_NS IRIREF .)
+    DECIMAL         reduce using rule 6 (header_one -> PREFIX PNAME_NS IRIREF .)
+    DOUBLE          reduce using rule 6 (header_one -> PREFIX PNAME_NS IRIREF .)
+    FLOAT           reduce using rule 6 (header_one -> PREFIX PNAME_NS IRIREF .)
+    BOOLEAN         reduce using rule 6 (header_one -> PREFIX PNAME_NS IRIREF .)
+
+
+state 79
+
+    (40) constraint -> ABSURD_MARK RULE_MARK conjunction_atoms . END_MARK
+
+    END_MARK        shift and go to state 104
+
+
+state 80
+
+    (48) conjunction_atoms_or_empty -> conjunction_atoms .
+
+    END_MARK        reduce using rule 48 (conjunction_atoms_or_empty -> conjunction_atoms .)
+
+
+state 81
+
+    (34) rule -> conjunction_atoms RULE_MARK conjunction_atoms_or_empty . END_MARK
+
+    END_MARK        shift and go to state 105
+
+
+state 82
+
+    (49) conjunction_atoms_or_empty -> empty .
+
+    END_MARK        reduce using rule 49 (conjunction_atoms_or_empty -> empty .)
+
+
+state 83
+
+    (35) drule -> START_STATEMENT_MARK conjunction_csf_list END_STATEMENT_MARK . RULE_MARK conjunction_atoms_or_empty END_MARK
+
+    RULE_MARK       shift and go to state 106
+
+
+state 84
+
+    (37) conjunction_csf_list -> conjunction_csf SEPARATOR . conjunction_csf_list
+    (36) conjunction_csf_list -> . conjunction_csf
+    (37) conjunction_csf_list -> . conjunction_csf SEPARATOR conjunction_csf_list
+    (38) conjunction_csf -> . atom
+    (39) conjunction_csf -> . START_TERMS_MARK conjunction_atoms END_TERMS_MARK
+    (51) atom -> . equality
+    (52) atom -> . std_atom
+    (53) equality -> . term EQUALITY_MARK term
+    (54) std_atom -> . predicate START_TERMS_MARK term_list END_TERMS_MARK
+    (59) term -> . constant
+    (60) term -> . variable
+    (61) predicate -> . prefixed_name
+    (62) predicate -> . L_IDENT
+    (63) predicate -> . IRIREF
+    (64) constant -> . prefixed_name
+    (65) constant -> . L_IDENT
+    (66) constant -> . IRIREF
+    (67) constant -> . literal
+    (68) variable -> . U_IDENT
+    (69) variable -> . BLANK_NODE_LABEL
+    (70) prefixed_name -> . PNAME_LN
+    (71) prefixed_name -> . PNAME_NS
+    (72) literal -> . rdf_literal
+    (73) literal -> . numeric_literal
+    (74) literal -> . boolean_literal
+    (76) rdf_literal -> . STRING TOPTOP iri
+    (77) rdf_literal -> . STRING LANGTAG
+    (78) rdf_literal -> . STRING
+    (79) numeric_literal -> . INTEGER
+    (80) numeric_literal -> . DECIMAL
+    (81) numeric_literal -> . DOUBLE
+    (82) numeric_literal -> . FLOAT
+    (75) boolean_literal -> . BOOLEAN
+
+    START_TERMS_MARK shift and go to state 70
+    L_IDENT         shift and go to state 12
+    IRIREF          shift and go to state 8
+    U_IDENT         shift and go to state 42
+    BLANK_NODE_LABEL shift and go to state 43
+    PNAME_LN        shift and go to state 44
+    PNAME_NS        shift and go to state 10
+    STRING          shift and go to state 48
+    INTEGER         shift and go to state 49
+    DECIMAL         shift and go to state 50
+    DOUBLE          shift and go to state 51
+    FLOAT           shift and go to state 52
+    BOOLEAN         shift and go to state 53
+
+    conjunction_csf                shift and go to state 68
+    conjunction_csf_list           shift and go to state 107
+    atom                           shift and go to state 69
+    equality                       shift and go to state 34
+    std_atom                       shift and go to state 35
+    term                           shift and go to state 36
+    predicate                      shift and go to state 37
+    constant                       shift and go to state 38
+    variable                       shift and go to state 39
+    prefixed_name                  shift and go to state 40
+    literal                        shift and go to state 41
+    rdf_literal                    shift and go to state 45
+    numeric_literal                shift and go to state 46
+    boolean_literal                shift and go to state 47
+
+state 85
+
+    (39) conjunction_csf -> START_TERMS_MARK conjunction_atoms . END_TERMS_MARK
+
+    END_TERMS_MARK  shift and go to state 108
+
+
+state 86
+
+    (30) cquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty . END_TERMS_MARK RULE_MARK conjunction_atoms_or_empty END_MARK
+    (32) nquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty . END_TERMS_MARK RULE_MARK conjunction_neg END_MARK
+
+    END_TERMS_MARK  shift and go to state 109
+
+
+state 87
+
+    (55) term_list_or_empty -> term_list .
+
+    END_TERMS_MARK  reduce using rule 55 (term_list_or_empty -> term_list .)
+
+
+state 88
+
+    (56) term_list_or_empty -> empty .
+
+    END_TERMS_MARK  reduce using rule 56 (term_list_or_empty -> empty .)
+
+
+state 89
+
+    (57) term_list -> term .
+    (58) term_list -> term . SEPARATOR term_list
+
+    END_TERMS_MARK  reduce using rule 57 (term_list -> term .)
+    SEPARATOR       shift and go to state 110
+
+
+state 90
+
+    (64) constant -> prefixed_name .
+
+    SEPARATOR       reduce using rule 64 (constant -> prefixed_name .)
+    END_TERMS_MARK  reduce using rule 64 (constant -> prefixed_name .)
+    RULE_MARK       reduce using rule 64 (constant -> prefixed_name .)
+    END_MARK        reduce using rule 64 (constant -> prefixed_name .)
+    END_STATEMENT_MARK reduce using rule 64 (constant -> prefixed_name .)
+
+
+state 91
+
+    (65) constant -> L_IDENT .
+
+    SEPARATOR       reduce using rule 65 (constant -> L_IDENT .)
+    END_TERMS_MARK  reduce using rule 65 (constant -> L_IDENT .)
+    RULE_MARK       reduce using rule 65 (constant -> L_IDENT .)
+    END_MARK        reduce using rule 65 (constant -> L_IDENT .)
+    END_STATEMENT_MARK reduce using rule 65 (constant -> L_IDENT .)
+
+
+state 92
+
+    (66) constant -> IRIREF .
+
+    SEPARATOR       reduce using rule 66 (constant -> IRIREF .)
+    END_TERMS_MARK  reduce using rule 66 (constant -> IRIREF .)
+    RULE_MARK       reduce using rule 66 (constant -> IRIREF .)
+    END_MARK        reduce using rule 66 (constant -> IRIREF .)
+    END_STATEMENT_MARK reduce using rule 66 (constant -> IRIREF .)
+
+
+state 93
+
+    (31) cquery -> QUESTION_MARK RULE_MARK conjunction_atoms_or_empty . END_MARK
+
+    END_MARK        shift and go to state 111
+
+
+state 94
+
+    (33) nquery -> QUESTION_MARK RULE_MARK conjunction_neg . END_MARK
+
+    END_MARK        shift and go to state 112
+
+
+state 95
+
+    (42) conjunction_neg -> neg_literal .
+    (43) conjunction_neg -> neg_literal . SEPARATOR conjunction_atoms
+    (45) conjunction_neg -> neg_literal . SEPARATOR conjunction_neg
+
+    END_MARK        reduce using rule 42 (conjunction_neg -> neg_literal .)
+    SEPARATOR       shift and go to state 113
+
+
+state 96
+
+    (44) conjunction_neg -> atom . SEPARATOR conjunction_neg
+    (46) conjunction_atoms -> atom .
+    (47) conjunction_atoms -> atom . SEPARATOR conjunction_atoms
+
+    SEPARATOR       shift and go to state 114
+    END_MARK        reduce using rule 46 (conjunction_atoms -> atom .)
+
+
+state 97
+
+    (50) neg_literal -> NEGATION . std_atom
+    (54) std_atom -> . predicate START_TERMS_MARK term_list END_TERMS_MARK
+    (61) predicate -> . prefixed_name
+    (62) predicate -> . L_IDENT
+    (63) predicate -> . IRIREF
+    (70) prefixed_name -> . PNAME_LN
+    (71) prefixed_name -> . PNAME_NS
+
+    L_IDENT         shift and go to state 117
+    IRIREF          shift and go to state 118
+    PNAME_LN        shift and go to state 44
+    PNAME_NS        shift and go to state 10
+
+    std_atom                       shift and go to state 115
+    predicate                      shift and go to state 37
+    prefixed_name                  shift and go to state 116
+
+state 98
+
+    (47) conjunction_atoms -> atom SEPARATOR conjunction_atoms .
+
+    RULE_MARK       reduce using rule 47 (conjunction_atoms -> atom SEPARATOR conjunction_atoms .)
+    END_MARK        reduce using rule 47 (conjunction_atoms -> atom SEPARATOR conjunction_atoms .)
+    END_TERMS_MARK  reduce using rule 47 (conjunction_atoms -> atom SEPARATOR conjunction_atoms .)
+
+
+state 99
+
+    (53) equality -> term EQUALITY_MARK term .
+
+    SEPARATOR       reduce using rule 53 (equality -> term EQUALITY_MARK term .)
+    RULE_MARK       reduce using rule 53 (equality -> term EQUALITY_MARK term .)
+    END_MARK        reduce using rule 53 (equality -> term EQUALITY_MARK term .)
+    END_STATEMENT_MARK reduce using rule 53 (equality -> term EQUALITY_MARK term .)
+    END_TERMS_MARK  reduce using rule 53 (equality -> term EQUALITY_MARK term .)
+
+
+state 100
+
+    (54) std_atom -> predicate START_TERMS_MARK term_list . END_TERMS_MARK
+
+    END_TERMS_MARK  shift and go to state 119
+
+
+state 101
+
+    (76) rdf_literal -> STRING TOPTOP iri .
+
+    EQUALITY_MARK   reduce using rule 76 (rdf_literal -> STRING TOPTOP iri .)
+    SEPARATOR       reduce using rule 76 (rdf_literal -> STRING TOPTOP iri .)
+    END_TERMS_MARK  reduce using rule 76 (rdf_literal -> STRING TOPTOP iri .)
+    RULE_MARK       reduce using rule 76 (rdf_literal -> STRING TOPTOP iri .)
+    END_MARK        reduce using rule 76 (rdf_literal -> STRING TOPTOP iri .)
+    END_STATEMENT_MARK reduce using rule 76 (rdf_literal -> STRING TOPTOP iri .)
+
+
+state 102
+
+    (83) iri -> IRIREF .
+
+    EQUALITY_MARK   reduce using rule 83 (iri -> IRIREF .)
+    SEPARATOR       reduce using rule 83 (iri -> IRIREF .)
+    END_TERMS_MARK  reduce using rule 83 (iri -> IRIREF .)
+    RULE_MARK       reduce using rule 83 (iri -> IRIREF .)
+    END_MARK        reduce using rule 83 (iri -> IRIREF .)
+    END_STATEMENT_MARK reduce using rule 83 (iri -> IRIREF .)
+
+
+state 103
+
+    (84) iri -> prefixed_name .
+
+    EQUALITY_MARK   reduce using rule 84 (iri -> prefixed_name .)
+    SEPARATOR       reduce using rule 84 (iri -> prefixed_name .)
+    END_TERMS_MARK  reduce using rule 84 (iri -> prefixed_name .)
+    RULE_MARK       reduce using rule 84 (iri -> prefixed_name .)
+    END_MARK        reduce using rule 84 (iri -> prefixed_name .)
+    END_STATEMENT_MARK reduce using rule 84 (iri -> prefixed_name .)
+
+
+state 104
+
+    (40) constraint -> ABSURD_MARK RULE_MARK conjunction_atoms END_MARK .
+
+    LABEL           reduce using rule 40 (constraint -> ABSURD_MARK RULE_MARK conjunction_atoms END_MARK .)
+    ABSURD_MARK     reduce using rule 40 (constraint -> ABSURD_MARK RULE_MARK conjunction_atoms END_MARK .)
+    START_STATEMENT_MARK reduce using rule 40 (constraint -> ABSURD_MARK RULE_MARK conjunction_atoms END_MARK .)
+    QUESTION_MARK   reduce using rule 40 (constraint -> ABSURD_MARK RULE_MARK conjunction_atoms END_MARK .)
+    L_IDENT         reduce using rule 40 (constraint -> ABSURD_MARK RULE_MARK conjunction_atoms END_MARK .)
+    IRIREF          reduce using rule 40 (constraint -> ABSURD_MARK RULE_MARK conjunction_atoms END_MARK .)
+    U_IDENT         reduce using rule 40 (constraint -> ABSURD_MARK RULE_MARK conjunction_atoms END_MARK .)
+    BLANK_NODE_LABEL reduce using rule 40 (constraint -> ABSURD_MARK RULE_MARK conjunction_atoms END_MARK .)
+    PNAME_LN        reduce using rule 40 (constraint -> ABSURD_MARK RULE_MARK conjunction_atoms END_MARK .)
+    PNAME_NS        reduce using rule 40 (constraint -> ABSURD_MARK RULE_MARK conjunction_atoms END_MARK .)
+    STRING          reduce using rule 40 (constraint -> ABSURD_MARK RULE_MARK conjunction_atoms END_MARK .)
+    INTEGER         reduce using rule 40 (constraint -> ABSURD_MARK RULE_MARK conjunction_atoms END_MARK .)
+    DECIMAL         reduce using rule 40 (constraint -> ABSURD_MARK RULE_MARK conjunction_atoms END_MARK .)
+    DOUBLE          reduce using rule 40 (constraint -> ABSURD_MARK RULE_MARK conjunction_atoms END_MARK .)
+    FLOAT           reduce using rule 40 (constraint -> ABSURD_MARK RULE_MARK conjunction_atoms END_MARK .)
+    BOOLEAN         reduce using rule 40 (constraint -> ABSURD_MARK RULE_MARK conjunction_atoms END_MARK .)
+    $end            reduce using rule 40 (constraint -> ABSURD_MARK RULE_MARK conjunction_atoms END_MARK .)
+    RULES           reduce using rule 40 (constraint -> ABSURD_MARK RULE_MARK conjunction_atoms END_MARK .)
+    FACTS           reduce using rule 40 (constraint -> ABSURD_MARK RULE_MARK conjunction_atoms END_MARK .)
+    CONSTRAINTS     reduce using rule 40 (constraint -> ABSURD_MARK RULE_MARK conjunction_atoms END_MARK .)
+    QUERIES         reduce using rule 40 (constraint -> ABSURD_MARK RULE_MARK conjunction_atoms END_MARK .)
+
+
+state 105
+
+    (34) rule -> conjunction_atoms RULE_MARK conjunction_atoms_or_empty END_MARK .
+
+    LABEL           reduce using rule 34 (rule -> conjunction_atoms RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    ABSURD_MARK     reduce using rule 34 (rule -> conjunction_atoms RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    START_STATEMENT_MARK reduce using rule 34 (rule -> conjunction_atoms RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    QUESTION_MARK   reduce using rule 34 (rule -> conjunction_atoms RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    L_IDENT         reduce using rule 34 (rule -> conjunction_atoms RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    IRIREF          reduce using rule 34 (rule -> conjunction_atoms RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    U_IDENT         reduce using rule 34 (rule -> conjunction_atoms RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    BLANK_NODE_LABEL reduce using rule 34 (rule -> conjunction_atoms RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    PNAME_LN        reduce using rule 34 (rule -> conjunction_atoms RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    PNAME_NS        reduce using rule 34 (rule -> conjunction_atoms RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    STRING          reduce using rule 34 (rule -> conjunction_atoms RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    INTEGER         reduce using rule 34 (rule -> conjunction_atoms RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    DECIMAL         reduce using rule 34 (rule -> conjunction_atoms RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    DOUBLE          reduce using rule 34 (rule -> conjunction_atoms RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    FLOAT           reduce using rule 34 (rule -> conjunction_atoms RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    BOOLEAN         reduce using rule 34 (rule -> conjunction_atoms RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    $end            reduce using rule 34 (rule -> conjunction_atoms RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    RULES           reduce using rule 34 (rule -> conjunction_atoms RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    FACTS           reduce using rule 34 (rule -> conjunction_atoms RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    CONSTRAINTS     reduce using rule 34 (rule -> conjunction_atoms RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    QUERIES         reduce using rule 34 (rule -> conjunction_atoms RULE_MARK conjunction_atoms_or_empty END_MARK .)
+
+
+state 106
+
+    (35) drule -> START_STATEMENT_MARK conjunction_csf_list END_STATEMENT_MARK RULE_MARK . conjunction_atoms_or_empty END_MARK
+    (48) conjunction_atoms_or_empty -> . conjunction_atoms
+    (49) conjunction_atoms_or_empty -> . empty
+    (46) conjunction_atoms -> . atom
+    (47) conjunction_atoms -> . atom SEPARATOR conjunction_atoms
+    (85) empty -> .
+    (51) atom -> . equality
+    (52) atom -> . std_atom
+    (53) equality -> . term EQUALITY_MARK term
+    (54) std_atom -> . predicate START_TERMS_MARK term_list END_TERMS_MARK
+    (59) term -> . constant
+    (60) term -> . variable
+    (61) predicate -> . prefixed_name
+    (62) predicate -> . L_IDENT
+    (63) predicate -> . IRIREF
+    (64) constant -> . prefixed_name
+    (65) constant -> . L_IDENT
+    (66) constant -> . IRIREF
+    (67) constant -> . literal
+    (68) variable -> . U_IDENT
+    (69) variable -> . BLANK_NODE_LABEL
+    (70) prefixed_name -> . PNAME_LN
+    (71) prefixed_name -> . PNAME_NS
+    (72) literal -> . rdf_literal
+    (73) literal -> . numeric_literal
+    (74) literal -> . boolean_literal
+    (76) rdf_literal -> . STRING TOPTOP iri
+    (77) rdf_literal -> . STRING LANGTAG
+    (78) rdf_literal -> . STRING
+    (79) numeric_literal -> . INTEGER
+    (80) numeric_literal -> . DECIMAL
+    (81) numeric_literal -> . DOUBLE
+    (82) numeric_literal -> . FLOAT
+    (75) boolean_literal -> . BOOLEAN
+
+    END_MARK        reduce using rule 85 (empty -> .)
+    L_IDENT         shift and go to state 12
+    IRIREF          shift and go to state 8
+    U_IDENT         shift and go to state 42
+    BLANK_NODE_LABEL shift and go to state 43
+    PNAME_LN        shift and go to state 44
+    PNAME_NS        shift and go to state 10
+    STRING          shift and go to state 48
+    INTEGER         shift and go to state 49
+    DECIMAL         shift and go to state 50
+    DOUBLE          shift and go to state 51
+    FLOAT           shift and go to state 52
+    BOOLEAN         shift and go to state 53
+
+    conjunction_atoms_or_empty     shift and go to state 120
+    conjunction_atoms              shift and go to state 80
+    empty                          shift and go to state 82
+    atom                           shift and go to state 33
+    equality                       shift and go to state 34
+    std_atom                       shift and go to state 35
+    term                           shift and go to state 36
+    predicate                      shift and go to state 37
+    constant                       shift and go to state 38
+    variable                       shift and go to state 39
+    prefixed_name                  shift and go to state 40
+    literal                        shift and go to state 41
+    rdf_literal                    shift and go to state 45
+    numeric_literal                shift and go to state 46
+    boolean_literal                shift and go to state 47
+
+state 107
+
+    (37) conjunction_csf_list -> conjunction_csf SEPARATOR conjunction_csf_list .
+
+    END_STATEMENT_MARK reduce using rule 37 (conjunction_csf_list -> conjunction_csf SEPARATOR conjunction_csf_list .)
+
+
+state 108
+
+    (39) conjunction_csf -> START_TERMS_MARK conjunction_atoms END_TERMS_MARK .
+
+    SEPARATOR       reduce using rule 39 (conjunction_csf -> START_TERMS_MARK conjunction_atoms END_TERMS_MARK .)
+    END_STATEMENT_MARK reduce using rule 39 (conjunction_csf -> START_TERMS_MARK conjunction_atoms END_TERMS_MARK .)
+
+
+state 109
+
+    (30) cquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK . RULE_MARK conjunction_atoms_or_empty END_MARK
+    (32) nquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK . RULE_MARK conjunction_neg END_MARK
+
+    RULE_MARK       shift and go to state 121
+
+
+state 110
+
+    (58) term_list -> term SEPARATOR . term_list
+    (57) term_list -> . term
+    (58) term_list -> . term SEPARATOR term_list
+    (59) term -> . constant
+    (60) term -> . variable
+    (64) constant -> . prefixed_name
+    (65) constant -> . L_IDENT
+    (66) constant -> . IRIREF
+    (67) constant -> . literal
+    (68) variable -> . U_IDENT
+    (69) variable -> . BLANK_NODE_LABEL
+    (70) prefixed_name -> . PNAME_LN
+    (71) prefixed_name -> . PNAME_NS
+    (72) literal -> . rdf_literal
+    (73) literal -> . numeric_literal
+    (74) literal -> . boolean_literal
+    (76) rdf_literal -> . STRING TOPTOP iri
+    (77) rdf_literal -> . STRING LANGTAG
+    (78) rdf_literal -> . STRING
+    (79) numeric_literal -> . INTEGER
+    (80) numeric_literal -> . DECIMAL
+    (81) numeric_literal -> . DOUBLE
+    (82) numeric_literal -> . FLOAT
+    (75) boolean_literal -> . BOOLEAN
+
+    L_IDENT         shift and go to state 91
+    IRIREF          shift and go to state 92
+    U_IDENT         shift and go to state 42
+    BLANK_NODE_LABEL shift and go to state 43
+    PNAME_LN        shift and go to state 44
+    PNAME_NS        shift and go to state 10
+    STRING          shift and go to state 48
+    INTEGER         shift and go to state 49
+    DECIMAL         shift and go to state 50
+    DOUBLE          shift and go to state 51
+    FLOAT           shift and go to state 52
+    BOOLEAN         shift and go to state 53
+
+    term                           shift and go to state 89
+    term_list                      shift and go to state 122
+    constant                       shift and go to state 38
+    variable                       shift and go to state 39
+    prefixed_name                  shift and go to state 90
+    literal                        shift and go to state 41
+    rdf_literal                    shift and go to state 45
+    numeric_literal                shift and go to state 46
+    boolean_literal                shift and go to state 47
+
+state 111
+
+    (31) cquery -> QUESTION_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .
+
+    LABEL           reduce using rule 31 (cquery -> QUESTION_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    ABSURD_MARK     reduce using rule 31 (cquery -> QUESTION_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    START_STATEMENT_MARK reduce using rule 31 (cquery -> QUESTION_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    QUESTION_MARK   reduce using rule 31 (cquery -> QUESTION_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    L_IDENT         reduce using rule 31 (cquery -> QUESTION_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    IRIREF          reduce using rule 31 (cquery -> QUESTION_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    U_IDENT         reduce using rule 31 (cquery -> QUESTION_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    BLANK_NODE_LABEL reduce using rule 31 (cquery -> QUESTION_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    PNAME_LN        reduce using rule 31 (cquery -> QUESTION_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    PNAME_NS        reduce using rule 31 (cquery -> QUESTION_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    STRING          reduce using rule 31 (cquery -> QUESTION_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    INTEGER         reduce using rule 31 (cquery -> QUESTION_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    DECIMAL         reduce using rule 31 (cquery -> QUESTION_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    DOUBLE          reduce using rule 31 (cquery -> QUESTION_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    FLOAT           reduce using rule 31 (cquery -> QUESTION_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    BOOLEAN         reduce using rule 31 (cquery -> QUESTION_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    $end            reduce using rule 31 (cquery -> QUESTION_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    RULES           reduce using rule 31 (cquery -> QUESTION_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    FACTS           reduce using rule 31 (cquery -> QUESTION_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    CONSTRAINTS     reduce using rule 31 (cquery -> QUESTION_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    QUERIES         reduce using rule 31 (cquery -> QUESTION_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+
+
+state 112
+
+    (33) nquery -> QUESTION_MARK RULE_MARK conjunction_neg END_MARK .
+
+    LABEL           reduce using rule 33 (nquery -> QUESTION_MARK RULE_MARK conjunction_neg END_MARK .)
+    ABSURD_MARK     reduce using rule 33 (nquery -> QUESTION_MARK RULE_MARK conjunction_neg END_MARK .)
+    START_STATEMENT_MARK reduce using rule 33 (nquery -> QUESTION_MARK RULE_MARK conjunction_neg END_MARK .)
+    QUESTION_MARK   reduce using rule 33 (nquery -> QUESTION_MARK RULE_MARK conjunction_neg END_MARK .)
+    L_IDENT         reduce using rule 33 (nquery -> QUESTION_MARK RULE_MARK conjunction_neg END_MARK .)
+    IRIREF          reduce using rule 33 (nquery -> QUESTION_MARK RULE_MARK conjunction_neg END_MARK .)
+    U_IDENT         reduce using rule 33 (nquery -> QUESTION_MARK RULE_MARK conjunction_neg END_MARK .)
+    BLANK_NODE_LABEL reduce using rule 33 (nquery -> QUESTION_MARK RULE_MARK conjunction_neg END_MARK .)
+    PNAME_LN        reduce using rule 33 (nquery -> QUESTION_MARK RULE_MARK conjunction_neg END_MARK .)
+    PNAME_NS        reduce using rule 33 (nquery -> QUESTION_MARK RULE_MARK conjunction_neg END_MARK .)
+    STRING          reduce using rule 33 (nquery -> QUESTION_MARK RULE_MARK conjunction_neg END_MARK .)
+    INTEGER         reduce using rule 33 (nquery -> QUESTION_MARK RULE_MARK conjunction_neg END_MARK .)
+    DECIMAL         reduce using rule 33 (nquery -> QUESTION_MARK RULE_MARK conjunction_neg END_MARK .)
+    DOUBLE          reduce using rule 33 (nquery -> QUESTION_MARK RULE_MARK conjunction_neg END_MARK .)
+    FLOAT           reduce using rule 33 (nquery -> QUESTION_MARK RULE_MARK conjunction_neg END_MARK .)
+    BOOLEAN         reduce using rule 33 (nquery -> QUESTION_MARK RULE_MARK conjunction_neg END_MARK .)
+    $end            reduce using rule 33 (nquery -> QUESTION_MARK RULE_MARK conjunction_neg END_MARK .)
+    RULES           reduce using rule 33 (nquery -> QUESTION_MARK RULE_MARK conjunction_neg END_MARK .)
+    FACTS           reduce using rule 33 (nquery -> QUESTION_MARK RULE_MARK conjunction_neg END_MARK .)
+    CONSTRAINTS     reduce using rule 33 (nquery -> QUESTION_MARK RULE_MARK conjunction_neg END_MARK .)
+    QUERIES         reduce using rule 33 (nquery -> QUESTION_MARK RULE_MARK conjunction_neg END_MARK .)
+
+
+state 113
+
+    (43) conjunction_neg -> neg_literal SEPARATOR . conjunction_atoms
+    (45) conjunction_neg -> neg_literal SEPARATOR . conjunction_neg
+    (46) conjunction_atoms -> . atom
+    (47) conjunction_atoms -> . atom SEPARATOR conjunction_atoms
+    (42) conjunction_neg -> . neg_literal
+    (43) conjunction_neg -> . neg_literal SEPARATOR conjunction_atoms
+    (44) conjunction_neg -> . atom SEPARATOR conjunction_neg
+    (45) conjunction_neg -> . neg_literal SEPARATOR conjunction_neg
+    (51) atom -> . equality
+    (52) atom -> . std_atom
+    (50) neg_literal -> . NEGATION std_atom
+    (53) equality -> . term EQUALITY_MARK term
+    (54) std_atom -> . predicate START_TERMS_MARK term_list END_TERMS_MARK
+    (59) term -> . constant
+    (60) term -> . variable
+    (61) predicate -> . prefixed_name
+    (62) predicate -> . L_IDENT
+    (63) predicate -> . IRIREF
+    (64) constant -> . prefixed_name
+    (65) constant -> . L_IDENT
+    (66) constant -> . IRIREF
+    (67) constant -> . literal
+    (68) variable -> . U_IDENT
+    (69) variable -> . BLANK_NODE_LABEL
+    (70) prefixed_name -> . PNAME_LN
+    (71) prefixed_name -> . PNAME_NS
+    (72) literal -> . rdf_literal
+    (73) literal -> . numeric_literal
+    (74) literal -> . boolean_literal
+    (76) rdf_literal -> . STRING TOPTOP iri
+    (77) rdf_literal -> . STRING LANGTAG
+    (78) rdf_literal -> . STRING
+    (79) numeric_literal -> . INTEGER
+    (80) numeric_literal -> . DECIMAL
+    (81) numeric_literal -> . DOUBLE
+    (82) numeric_literal -> . FLOAT
+    (75) boolean_literal -> . BOOLEAN
+
+    NEGATION        shift and go to state 97
+    L_IDENT         shift and go to state 12
+    IRIREF          shift and go to state 8
+    U_IDENT         shift and go to state 42
+    BLANK_NODE_LABEL shift and go to state 43
+    PNAME_LN        shift and go to state 44
+    PNAME_NS        shift and go to state 10
+    STRING          shift and go to state 48
+    INTEGER         shift and go to state 49
+    DECIMAL         shift and go to state 50
+    DOUBLE          shift and go to state 51
+    FLOAT           shift and go to state 52
+    BOOLEAN         shift and go to state 53
+
+    neg_literal                    shift and go to state 95
+    conjunction_atoms              shift and go to state 123
+    conjunction_neg                shift and go to state 124
+    atom                           shift and go to state 125
+    equality                       shift and go to state 34
+    std_atom                       shift and go to state 35
+    term                           shift and go to state 36
+    predicate                      shift and go to state 37
+    constant                       shift and go to state 38
+    variable                       shift and go to state 39
+    prefixed_name                  shift and go to state 40
+    literal                        shift and go to state 41
+    rdf_literal                    shift and go to state 45
+    numeric_literal                shift and go to state 46
+    boolean_literal                shift and go to state 47
+
+state 114
+
+    (44) conjunction_neg -> atom SEPARATOR . conjunction_neg
+    (47) conjunction_atoms -> atom SEPARATOR . conjunction_atoms
+    (42) conjunction_neg -> . neg_literal
+    (43) conjunction_neg -> . neg_literal SEPARATOR conjunction_atoms
+    (44) conjunction_neg -> . atom SEPARATOR conjunction_neg
+    (45) conjunction_neg -> . neg_literal SEPARATOR conjunction_neg
+    (46) conjunction_atoms -> . atom
+    (47) conjunction_atoms -> . atom SEPARATOR conjunction_atoms
+    (50) neg_literal -> . NEGATION std_atom
+    (51) atom -> . equality
+    (52) atom -> . std_atom
+    (53) equality -> . term EQUALITY_MARK term
+    (54) std_atom -> . predicate START_TERMS_MARK term_list END_TERMS_MARK
+    (59) term -> . constant
+    (60) term -> . variable
+    (61) predicate -> . prefixed_name
+    (62) predicate -> . L_IDENT
+    (63) predicate -> . IRIREF
+    (64) constant -> . prefixed_name
+    (65) constant -> . L_IDENT
+    (66) constant -> . IRIREF
+    (67) constant -> . literal
+    (68) variable -> . U_IDENT
+    (69) variable -> . BLANK_NODE_LABEL
+    (70) prefixed_name -> . PNAME_LN
+    (71) prefixed_name -> . PNAME_NS
+    (72) literal -> . rdf_literal
+    (73) literal -> . numeric_literal
+    (74) literal -> . boolean_literal
+    (76) rdf_literal -> . STRING TOPTOP iri
+    (77) rdf_literal -> . STRING LANGTAG
+    (78) rdf_literal -> . STRING
+    (79) numeric_literal -> . INTEGER
+    (80) numeric_literal -> . DECIMAL
+    (81) numeric_literal -> . DOUBLE
+    (82) numeric_literal -> . FLOAT
+    (75) boolean_literal -> . BOOLEAN
+
+    NEGATION        shift and go to state 97
+    L_IDENT         shift and go to state 12
+    IRIREF          shift and go to state 8
+    U_IDENT         shift and go to state 42
+    BLANK_NODE_LABEL shift and go to state 43
+    PNAME_LN        shift and go to state 44
+    PNAME_NS        shift and go to state 10
+    STRING          shift and go to state 48
+    INTEGER         shift and go to state 49
+    DECIMAL         shift and go to state 50
+    DOUBLE          shift and go to state 51
+    FLOAT           shift and go to state 52
+    BOOLEAN         shift and go to state 53
+
+    atom                           shift and go to state 96
+    conjunction_neg                shift and go to state 126
+    conjunction_atoms              shift and go to state 98
+    neg_literal                    shift and go to state 95
+    std_atom                       shift and go to state 35
+    equality                       shift and go to state 34
+    term                           shift and go to state 36
+    predicate                      shift and go to state 37
+    constant                       shift and go to state 38
+    variable                       shift and go to state 39
+    prefixed_name                  shift and go to state 40
+    literal                        shift and go to state 41
+    rdf_literal                    shift and go to state 45
+    numeric_literal                shift and go to state 46
+    boolean_literal                shift and go to state 47
+
+state 115
+
+    (50) neg_literal -> NEGATION std_atom .
+
+    SEPARATOR       reduce using rule 50 (neg_literal -> NEGATION std_atom .)
+    END_MARK        reduce using rule 50 (neg_literal -> NEGATION std_atom .)
+
+
+state 116
+
+    (61) predicate -> prefixed_name .
+
+    START_TERMS_MARK reduce using rule 61 (predicate -> prefixed_name .)
+
+
+state 117
+
+    (62) predicate -> L_IDENT .
+
+    START_TERMS_MARK reduce using rule 62 (predicate -> L_IDENT .)
+
+
+state 118
+
+    (63) predicate -> IRIREF .
+
+    START_TERMS_MARK reduce using rule 63 (predicate -> IRIREF .)
+
+
+state 119
+
+    (54) std_atom -> predicate START_TERMS_MARK term_list END_TERMS_MARK .
+
+    SEPARATOR       reduce using rule 54 (std_atom -> predicate START_TERMS_MARK term_list END_TERMS_MARK .)
+    RULE_MARK       reduce using rule 54 (std_atom -> predicate START_TERMS_MARK term_list END_TERMS_MARK .)
+    END_MARK        reduce using rule 54 (std_atom -> predicate START_TERMS_MARK term_list END_TERMS_MARK .)
+    END_STATEMENT_MARK reduce using rule 54 (std_atom -> predicate START_TERMS_MARK term_list END_TERMS_MARK .)
+    END_TERMS_MARK  reduce using rule 54 (std_atom -> predicate START_TERMS_MARK term_list END_TERMS_MARK .)
+
+
+state 120
+
+    (35) drule -> START_STATEMENT_MARK conjunction_csf_list END_STATEMENT_MARK RULE_MARK conjunction_atoms_or_empty . END_MARK
+
+    END_MARK        shift and go to state 127
+
+
+state 121
+
+    (30) cquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK . conjunction_atoms_or_empty END_MARK
+    (32) nquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK . conjunction_neg END_MARK
+    (48) conjunction_atoms_or_empty -> . conjunction_atoms
+    (49) conjunction_atoms_or_empty -> . empty
+    (42) conjunction_neg -> . neg_literal
+    (43) conjunction_neg -> . neg_literal SEPARATOR conjunction_atoms
+    (44) conjunction_neg -> . atom SEPARATOR conjunction_neg
+    (45) conjunction_neg -> . neg_literal SEPARATOR conjunction_neg
+    (46) conjunction_atoms -> . atom
+    (47) conjunction_atoms -> . atom SEPARATOR conjunction_atoms
+    (85) empty -> .
+    (50) neg_literal -> . NEGATION std_atom
+    (51) atom -> . equality
+    (52) atom -> . std_atom
+    (53) equality -> . term EQUALITY_MARK term
+    (54) std_atom -> . predicate START_TERMS_MARK term_list END_TERMS_MARK
+    (59) term -> . constant
+    (60) term -> . variable
+    (61) predicate -> . prefixed_name
+    (62) predicate -> . L_IDENT
+    (63) predicate -> . IRIREF
+    (64) constant -> . prefixed_name
+    (65) constant -> . L_IDENT
+    (66) constant -> . IRIREF
+    (67) constant -> . literal
+    (68) variable -> . U_IDENT
+    (69) variable -> . BLANK_NODE_LABEL
+    (70) prefixed_name -> . PNAME_LN
+    (71) prefixed_name -> . PNAME_NS
+    (72) literal -> . rdf_literal
+    (73) literal -> . numeric_literal
+    (74) literal -> . boolean_literal
+    (76) rdf_literal -> . STRING TOPTOP iri
+    (77) rdf_literal -> . STRING LANGTAG
+    (78) rdf_literal -> . STRING
+    (79) numeric_literal -> . INTEGER
+    (80) numeric_literal -> . DECIMAL
+    (81) numeric_literal -> . DOUBLE
+    (82) numeric_literal -> . FLOAT
+    (75) boolean_literal -> . BOOLEAN
+
+    END_MARK        reduce using rule 85 (empty -> .)
+    NEGATION        shift and go to state 97
+    L_IDENT         shift and go to state 12
+    IRIREF          shift and go to state 8
+    U_IDENT         shift and go to state 42
+    BLANK_NODE_LABEL shift and go to state 43
+    PNAME_LN        shift and go to state 44
+    PNAME_NS        shift and go to state 10
+    STRING          shift and go to state 48
+    INTEGER         shift and go to state 49
+    DECIMAL         shift and go to state 50
+    DOUBLE          shift and go to state 51
+    FLOAT           shift and go to state 52
+    BOOLEAN         shift and go to state 53
+
+    conjunction_atoms_or_empty     shift and go to state 128
+    conjunction_neg                shift and go to state 129
+    conjunction_atoms              shift and go to state 80
+    empty                          shift and go to state 82
+    neg_literal                    shift and go to state 95
+    atom                           shift and go to state 96
+    std_atom                       shift and go to state 35
+    equality                       shift and go to state 34
+    term                           shift and go to state 36
+    predicate                      shift and go to state 37
+    constant                       shift and go to state 38
+    variable                       shift and go to state 39
+    prefixed_name                  shift and go to state 40
+    literal                        shift and go to state 41
+    rdf_literal                    shift and go to state 45
+    numeric_literal                shift and go to state 46
+    boolean_literal                shift and go to state 47
+
+state 122
+
+    (58) term_list -> term SEPARATOR term_list .
+
+    END_TERMS_MARK  reduce using rule 58 (term_list -> term SEPARATOR term_list .)
+
+
+state 123
+
+    (43) conjunction_neg -> neg_literal SEPARATOR conjunction_atoms .
+
+    END_MARK        reduce using rule 43 (conjunction_neg -> neg_literal SEPARATOR conjunction_atoms .)
+
+
+state 124
+
+    (45) conjunction_neg -> neg_literal SEPARATOR conjunction_neg .
+
+    END_MARK        reduce using rule 45 (conjunction_neg -> neg_literal SEPARATOR conjunction_neg .)
+
+
+state 125
+
+    (46) conjunction_atoms -> atom .
+    (47) conjunction_atoms -> atom . SEPARATOR conjunction_atoms
+    (44) conjunction_neg -> atom . SEPARATOR conjunction_neg
+
+    END_MARK        reduce using rule 46 (conjunction_atoms -> atom .)
+    SEPARATOR       shift and go to state 130
+
+
+state 126
+
+    (44) conjunction_neg -> atom SEPARATOR conjunction_neg .
+
+    END_MARK        reduce using rule 44 (conjunction_neg -> atom SEPARATOR conjunction_neg .)
+
+
+state 127
+
+    (35) drule -> START_STATEMENT_MARK conjunction_csf_list END_STATEMENT_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .
+
+    LABEL           reduce using rule 35 (drule -> START_STATEMENT_MARK conjunction_csf_list END_STATEMENT_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    ABSURD_MARK     reduce using rule 35 (drule -> START_STATEMENT_MARK conjunction_csf_list END_STATEMENT_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    START_STATEMENT_MARK reduce using rule 35 (drule -> START_STATEMENT_MARK conjunction_csf_list END_STATEMENT_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    QUESTION_MARK   reduce using rule 35 (drule -> START_STATEMENT_MARK conjunction_csf_list END_STATEMENT_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    L_IDENT         reduce using rule 35 (drule -> START_STATEMENT_MARK conjunction_csf_list END_STATEMENT_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    IRIREF          reduce using rule 35 (drule -> START_STATEMENT_MARK conjunction_csf_list END_STATEMENT_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    U_IDENT         reduce using rule 35 (drule -> START_STATEMENT_MARK conjunction_csf_list END_STATEMENT_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    BLANK_NODE_LABEL reduce using rule 35 (drule -> START_STATEMENT_MARK conjunction_csf_list END_STATEMENT_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    PNAME_LN        reduce using rule 35 (drule -> START_STATEMENT_MARK conjunction_csf_list END_STATEMENT_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    PNAME_NS        reduce using rule 35 (drule -> START_STATEMENT_MARK conjunction_csf_list END_STATEMENT_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    STRING          reduce using rule 35 (drule -> START_STATEMENT_MARK conjunction_csf_list END_STATEMENT_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    INTEGER         reduce using rule 35 (drule -> START_STATEMENT_MARK conjunction_csf_list END_STATEMENT_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    DECIMAL         reduce using rule 35 (drule -> START_STATEMENT_MARK conjunction_csf_list END_STATEMENT_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    DOUBLE          reduce using rule 35 (drule -> START_STATEMENT_MARK conjunction_csf_list END_STATEMENT_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    FLOAT           reduce using rule 35 (drule -> START_STATEMENT_MARK conjunction_csf_list END_STATEMENT_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    BOOLEAN         reduce using rule 35 (drule -> START_STATEMENT_MARK conjunction_csf_list END_STATEMENT_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    $end            reduce using rule 35 (drule -> START_STATEMENT_MARK conjunction_csf_list END_STATEMENT_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    RULES           reduce using rule 35 (drule -> START_STATEMENT_MARK conjunction_csf_list END_STATEMENT_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    FACTS           reduce using rule 35 (drule -> START_STATEMENT_MARK conjunction_csf_list END_STATEMENT_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    CONSTRAINTS     reduce using rule 35 (drule -> START_STATEMENT_MARK conjunction_csf_list END_STATEMENT_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    QUERIES         reduce using rule 35 (drule -> START_STATEMENT_MARK conjunction_csf_list END_STATEMENT_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+
+
+state 128
+
+    (30) cquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_atoms_or_empty . END_MARK
+
+    END_MARK        shift and go to state 131
+
+
+state 129
+
+    (32) nquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_neg . END_MARK
+
+    END_MARK        shift and go to state 132
+
+
+state 130
+
+    (47) conjunction_atoms -> atom SEPARATOR . conjunction_atoms
+    (44) conjunction_neg -> atom SEPARATOR . conjunction_neg
+    (46) conjunction_atoms -> . atom
+    (47) conjunction_atoms -> . atom SEPARATOR conjunction_atoms
+    (42) conjunction_neg -> . neg_literal
+    (43) conjunction_neg -> . neg_literal SEPARATOR conjunction_atoms
+    (44) conjunction_neg -> . atom SEPARATOR conjunction_neg
+    (45) conjunction_neg -> . neg_literal SEPARATOR conjunction_neg
+    (51) atom -> . equality
+    (52) atom -> . std_atom
+    (50) neg_literal -> . NEGATION std_atom
+    (53) equality -> . term EQUALITY_MARK term
+    (54) std_atom -> . predicate START_TERMS_MARK term_list END_TERMS_MARK
+    (59) term -> . constant
+    (60) term -> . variable
+    (61) predicate -> . prefixed_name
+    (62) predicate -> . L_IDENT
+    (63) predicate -> . IRIREF
+    (64) constant -> . prefixed_name
+    (65) constant -> . L_IDENT
+    (66) constant -> . IRIREF
+    (67) constant -> . literal
+    (68) variable -> . U_IDENT
+    (69) variable -> . BLANK_NODE_LABEL
+    (70) prefixed_name -> . PNAME_LN
+    (71) prefixed_name -> . PNAME_NS
+    (72) literal -> . rdf_literal
+    (73) literal -> . numeric_literal
+    (74) literal -> . boolean_literal
+    (76) rdf_literal -> . STRING TOPTOP iri
+    (77) rdf_literal -> . STRING LANGTAG
+    (78) rdf_literal -> . STRING
+    (79) numeric_literal -> . INTEGER
+    (80) numeric_literal -> . DECIMAL
+    (81) numeric_literal -> . DOUBLE
+    (82) numeric_literal -> . FLOAT
+    (75) boolean_literal -> . BOOLEAN
+
+    NEGATION        shift and go to state 97
+    L_IDENT         shift and go to state 12
+    IRIREF          shift and go to state 8
+    U_IDENT         shift and go to state 42
+    BLANK_NODE_LABEL shift and go to state 43
+    PNAME_LN        shift and go to state 44
+    PNAME_NS        shift and go to state 10
+    STRING          shift and go to state 48
+    INTEGER         shift and go to state 49
+    DECIMAL         shift and go to state 50
+    DOUBLE          shift and go to state 51
+    FLOAT           shift and go to state 52
+    BOOLEAN         shift and go to state 53
+
+    atom                           shift and go to state 125
+    conjunction_atoms              shift and go to state 98
+    conjunction_neg                shift and go to state 126
+    neg_literal                    shift and go to state 95
+    equality                       shift and go to state 34
+    std_atom                       shift and go to state 35
+    term                           shift and go to state 36
+    predicate                      shift and go to state 37
+    constant                       shift and go to state 38
+    variable                       shift and go to state 39
+    prefixed_name                  shift and go to state 40
+    literal                        shift and go to state 41
+    rdf_literal                    shift and go to state 45
+    numeric_literal                shift and go to state 46
+    boolean_literal                shift and go to state 47
+
+state 131
+
+    (30) cquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .
+
+    LABEL           reduce using rule 30 (cquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    ABSURD_MARK     reduce using rule 30 (cquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    START_STATEMENT_MARK reduce using rule 30 (cquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    QUESTION_MARK   reduce using rule 30 (cquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    L_IDENT         reduce using rule 30 (cquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    IRIREF          reduce using rule 30 (cquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    U_IDENT         reduce using rule 30 (cquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    BLANK_NODE_LABEL reduce using rule 30 (cquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    PNAME_LN        reduce using rule 30 (cquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    PNAME_NS        reduce using rule 30 (cquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    STRING          reduce using rule 30 (cquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    INTEGER         reduce using rule 30 (cquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    DECIMAL         reduce using rule 30 (cquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    DOUBLE          reduce using rule 30 (cquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    FLOAT           reduce using rule 30 (cquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    BOOLEAN         reduce using rule 30 (cquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    $end            reduce using rule 30 (cquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    RULES           reduce using rule 30 (cquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    FACTS           reduce using rule 30 (cquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    CONSTRAINTS     reduce using rule 30 (cquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+    QUERIES         reduce using rule 30 (cquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_atoms_or_empty END_MARK .)
+
+
+state 132
+
+    (32) nquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_neg END_MARK .
+
+    LABEL           reduce using rule 32 (nquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_neg END_MARK .)
+    ABSURD_MARK     reduce using rule 32 (nquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_neg END_MARK .)
+    START_STATEMENT_MARK reduce using rule 32 (nquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_neg END_MARK .)
+    QUESTION_MARK   reduce using rule 32 (nquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_neg END_MARK .)
+    L_IDENT         reduce using rule 32 (nquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_neg END_MARK .)
+    IRIREF          reduce using rule 32 (nquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_neg END_MARK .)
+    U_IDENT         reduce using rule 32 (nquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_neg END_MARK .)
+    BLANK_NODE_LABEL reduce using rule 32 (nquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_neg END_MARK .)
+    PNAME_LN        reduce using rule 32 (nquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_neg END_MARK .)
+    PNAME_NS        reduce using rule 32 (nquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_neg END_MARK .)
+    STRING          reduce using rule 32 (nquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_neg END_MARK .)
+    INTEGER         reduce using rule 32 (nquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_neg END_MARK .)
+    DECIMAL         reduce using rule 32 (nquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_neg END_MARK .)
+    DOUBLE          reduce using rule 32 (nquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_neg END_MARK .)
+    FLOAT           reduce using rule 32 (nquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_neg END_MARK .)
+    BOOLEAN         reduce using rule 32 (nquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_neg END_MARK .)
+    $end            reduce using rule 32 (nquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_neg END_MARK .)
+    RULES           reduce using rule 32 (nquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_neg END_MARK .)
+    FACTS           reduce using rule 32 (nquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_neg END_MARK .)
+    CONSTRAINTS     reduce using rule 32 (nquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_neg END_MARK .)
+    QUERIES         reduce using rule 32 (nquery -> QUESTION_MARK START_TERMS_MARK term_list_or_empty END_TERMS_MARK RULE_MARK conjunction_neg END_MARK .)
+
